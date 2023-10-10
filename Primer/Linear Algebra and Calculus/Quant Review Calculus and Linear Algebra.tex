@@ -1247,15 +1247,15 @@ eigenvalues of the product matrices $\mathbf{A}^* \mathbf{A}$ and $\mathbf{A} \m
               however the signs in the left and right singular vectors can be interchanged.
               Besides when at least one singular value is zero, there are many possible
               corresponding singular vectors.
-        \item if $\mathbf{A}$ is \textbf{real symmetric} then (spectral theorem) it is diagonalizable and therefore
+        \item if $\mathbf{X}$ is \textbf{real symmetric} then (spectral theorem) it is diagonalizable and therefore
               has at least one eigen-decomposition $\mathbf{A}=\mathbf{Q}\mathbf{\Lambda}\mathbf{Q}^{-1} = \mathbf{Q}\mathbf{\Lambda}\mathbf{Q}^\top$.
               In general this decomposition is not unique: the eigenvalues part $\mathbf{\Lambda}$ is unique;
               however the eigenvectors part $\mathbf{Q}$ is only unique if no eigenvalue is zero.
-        \item If $\mathbf{A}$ is a \textbf{real symmetric and at least positive semi-definite}, then 
+        \item If $\mathbf{X}$ is a \textbf{real symmetric and at least positive semi-definite}, then 
         $\Sigma$ is a diagonal matrix containing the eigenvalues, and $U=V$. 
         That is, the SVD 
         $$
-        \mathbf{A} \xlongequal{\text{SVD}} \mathbf{U}\mathbf{\Sigma}\mathbf{V}^\top 
+        \mathbf{X} \xlongequal{\text{SVD}} \mathbf{U}\mathbf{\Sigma}\mathbf{V}^\top 
         \xlongequal{\mathbf{U}=\mathbf{V}=\mathbf{Q},\mathbf{\Sigma}=\mathbf{\Lambda}} 
         \mathbf{Q}\mathbf{\Lambda}\mathbf{Q}^\top
         \longrightarrow \text{eigen-decomposition}$$ 
@@ -1300,8 +1300,21 @@ $$
     \end{array}
 $$
 The singular value decomposition provides an orthonormal basis for the four fundamental subspaces.
-
-\section*{Properties of the SVD}
+\begin{remark}\hfill
+    \begin{enumerate}
+        \item Use the property that 
+        $\mathbf{X}\mathbf{v}_{i}=\sigma_{i} \mathbf{u}_{i}, i = 1, \ldots, r$, 
+        then $\mathbf{u}_{i}$ is in $\color{blue}{\mathcal{R}\left(\mathbf{X}\right)}$. 
+        Now since $\operatorname*{rank}\mathbf{X} = r$ and $\mathbf{u}_i$`s are orthogonal to each other, 
+        we obtain $\color{blue}{\mathcal{R}\left(\mathbf{X}\right)} =
+        \text{span}\left\{\color{blue}{u_{1}},\dots,\color{blue}{u_{r}}\right\}$. 
+        Similarly, from $\mathbf{A}^{\top} \mathbf{u}_{i}=\sigma_{i} \mathbf{v}_{i}, i = 1, \ldots, r$, 
+        we obtain $\text{span}\left\{\color{blue}{v_{1}},\dots,\color{blue}{v_{r}}\right\}   
+        {\color{blue}\mathbf{V}_{\mathcal{R}}} {\color{blue}\mathbf{V}_{\mathcal{R}}^\top}$. 
+    \end{enumerate}
+    
+\end{remark}
+\subsection*{Properties of the SVD}
 \begin{multicols*}{2}
 
 \textbf{Basics}
@@ -1312,7 +1325,7 @@ $$
     \end{cases}
 $$
 \begin{itemize}
-    \item $ A \mathbf{v}_{i}=\sigma_{i} \mathbf{u}_{i}$ and $A^{\top} \mathbf{u}_{i}=\sigma_{i} \mathbf{v}_{i}$.
+    \item $\mathbf{A}\mathbf{v}_{i}=\sigma_{i} \mathbf{u}_{i}$ and $\mathbf{A}^{\top} \mathbf{u}_{i}=\sigma_{i} \mathbf{v}_{i}$.
     \item $\operatorname{rank}(A)=\operatorname{rank}\Sigma = r$.
     \item $\sigma_A^2 = \sigma_{A A^{\top}} = \sigma_{A^{\top} A}$. That is, The singular values of
           $A^\top A$ and $A A^\top$ are $\sigma_1^2, \ldots, \sigma_n^2$, and thus $\left\|A^\top A\right\|_2 = \left\|A A^\top\right\|_2=\sigma_{\max }^2$.
