@@ -1243,14 +1243,22 @@ eigenvalues of the product matrices $\mathbf{A}^* \mathbf{A}$ and $\mathbf{A} \m
 \begin{remark}\hfill
     \begin{enumerate}
         \item This decomposition is not unique:
-              the singular values part $\Sigma$ is unique;
+              the singular values part $\mathbf{\Sigma}$ is unique;
               however the signs in the left and right singular vectors can be interchanged.
               Besides when at least one singular value is zero, there are many possible
               corresponding singular vectors.
-        \item if $A$ is \textbf{real symmetric} then (spectral theorem) it is diagonalizable and therefore
-              has at least one eigen-decomposition $A=Q \Lambda Q^{-1}=Q \Lambda Q^{\top}$.
-              In general this decomposition is not unique: the eigenvalues part $\Lambda$ is unique;
-              however the eigenvectors part $Q$ is only unique if no eigenvalue is zero.
+        \item if $\mathbf{A}$ is \textbf{real symmetric} then (spectral theorem) it is diagonalizable and therefore
+              has at least one eigen-decomposition $\mathbf{A}=\mathbf{Q}\mathbf{\Lambda}\mathbf{Q}^{-1} = \mathbf{Q}\mathbf{\Lambda}\mathbf{Q}^\top$.
+              In general this decomposition is not unique: the eigenvalues part $\mathbf{\Lambda}$ is unique;
+              however the eigenvectors part $\mathbf{Q}$ is only unique if no eigenvalue is zero.
+        \item If $\mathbf{A}$ is a \textbf{real symmetric and at least positive semi-definite}, then 
+        $\Sigma$ is a diagonal matrix containing the eigenvalues, and $U=V$. 
+        That is, the SVD 
+        $$
+        \mathbf{A} \xlongequal{\text{SVD}} \mathbf{U}\mathbf{\Sigma}\mathbf{V}^\top 
+        \xlongequal{\mathbf{U}=\mathbf{V}=\mathbf{Q},\mathbf{\Sigma}=\mathbf{\Lambda}} 
+        \mathbf{Q}\mathbf{\Lambda}\mathbf{Q}^\top
+        \longrightarrow \text{eigen-decomposition}$$ 
     \end{enumerate}
 \end{remark}
 \subsection*{Fundamental Subspaces}
@@ -1306,9 +1314,6 @@ $$
 \begin{itemize}
     \item $ A \mathbf{v}_{i}=\sigma_{i} \mathbf{u}_{i}$ and $A^{\top} \mathbf{u}_{i}=\sigma_{i} \mathbf{v}_{i}$.
     \item $\operatorname{rank}(A)=\operatorname{rank}\Sigma = r$.
-    \item If $A$ is real symmetric and positive definite, then 
-    $\Sigma$ is a diagonal matrix containing the eigenvalues, and $U=V$.
-
     \item $\sigma_A^2 = \sigma_{A A^{\top}} = \sigma_{A^{\top} A}$. That is, The singular values of
           $A^\top A$ and $A A^\top$ are $\sigma_1^2, \ldots, \sigma_n^2$, and thus $\left\|A^\top A\right\|_2 = \left\|A A^\top\right\|_2=\sigma_{\max }^2$.
     \item The right singular vectors (columns of $V$ ) are eigenvectors of $A^{\top} A$

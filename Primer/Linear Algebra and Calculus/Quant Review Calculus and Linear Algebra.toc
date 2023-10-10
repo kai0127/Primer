@@ -24,5 +24,5 @@
 \contentsline {section}{\numberline {19}Positive-Definite Matrix}{8}{section.19}%
 \contentsline {section}{\numberline {20}Cholesky Decomposition}{8}{section.20}%
 \contentsline {section}{\numberline {21}The Singular Value Decomposition}{8}{section.21}%
-\contentsline {section}{\numberline {22}Triangular Matrix}{10}{section.22}%
-\contentsline {section}{\numberline {23}Some nice problems}{10}{section.23}%
+\contentsline {section}{\numberline {22}Triangular Matrix}{11}{section.22}%
+\contentsline {section}{\numberline {23}Some nice problems}{11}{section.23}%
