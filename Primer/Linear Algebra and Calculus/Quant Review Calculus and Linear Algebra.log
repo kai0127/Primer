@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.9.15)  10 OCT 2023 09:21
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.9.15)  10 OCT 2023 14:53
  restricted system commands enabled.
  file:line:error style messages enabled.
 **"/Users/linda/Desktop/LaTeX/Primer/Linear Algebra and Calculus/Quant Review Calculus and Linear Algebra.tex"
@@ -1297,7 +1297,7 @@ LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
 (Font)              No change on input line 453.
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
 (Font)              No change on input line 648.
-<inverse.png, id=198, 1409.265pt x 1027.84pt>
+<inverse.png, id=193, 1409.265pt x 1027.84pt>
 File: inverse.png Graphic file (type png)
 <use inverse.png>
 Package luatex.def Info: inverse.png  used on input line 668.
@@ -1320,11 +1320,6 @@ LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
 (Font)              No change on input line 824.
 
-Underfull \hbox (badness 5652) in paragraph at lines 898--899
-[]\TU/Vollkorn(0)/m/n/10 Cer-tain ma-trix norms are also in-vari-ant: $[][] \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 k\OML/cmm/m/it/10 A\OMS/cmsy/m/n/10 k[]$ \TU/Vollkorn(0)/m/n/10 and
- []
-
-
 Overfull \hbox (13.50629pt too wide) detected at line 924
 \OML/cmm/m/it/10 e \OMS/cmsy/m/n/10 ? \OML/cmm/m/it/10 R\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 A\OT1/cmr/m/n/10 ) =[]\OMS/cmsy/m/n/10 ) \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 b \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 Ax\OT1/cmr/m/n/10 )[]\OML/cmm/m/it/10 A \OT1/cmr/m/n/10 = 0 =[]\OMS/cmsy/m/n/10 ) \OML/cmm/m/it/10 x \OT1/cmr/m/n/10 = [][] \OML/cmm/m/it/10 A[]b \OT1/cmr/m/n/10 =[]\OMS/cmsy/m/n/10 ) \OML/cmm/m/it/10 p \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 Ax \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 A [][] A[]b
  []
@@ -1334,43 +1329,43 @@ LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
 (Font)              No change on input line 1058.
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
 (Font)              No change on input line 1067.
- [8]
+ [8] [9]
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
-(Font)              No change on input line 1250.
+(Font)              No change on input line 1406.
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
-(Font)              No change on input line 1267.
+(Font)              No change on input line 1423.
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
-(Font)              No change on input line 1288.
+(Font)              No change on input line 1444.
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
-(Font)              No change on input line 1295.
+(Font)              No change on input line 1451.
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
-(Font)              No change on input line 1306.
+(Font)              No change on input line 1462.
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
-(Font)              No change on input line 1326.
+(Font)              No change on input line 1482.
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
-(Font)              No change on input line 1343.
- [9]
+(Font)              No change on input line 1499.
+ [10]
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
-(Font)              No change on input line 1388.
- [10] ("./Quant Review Calculus and Linear Algebra.aux")
+(Font)              No change on input line 1571.
+ [11] ("./Quant Review Calculus and Linear Algebra.aux")
 Package rerunfilecheck Info: File `"Quant Review Calculus and Linear Algebra".out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
 )
 
 Here is how much of LuaTeX's memory you used:
- 33077 strings out of 478285
- 382259,1977958 words of node,token memory allocated
- 3846 words of node memory still in use:
-   12 hlist, 2 vlist, 5 rule, 2 glue, 4 kern, 3 sub_mlist, 1 glyph, 1447 attribute, 63 glue_spec, 144 attribute_list, 2 write, 14 user_defined nodes
-   avail lists: 1:38,2:84271,3:924,4:1066,5:1175,6:176,7:13657,8:88,9:2464,10:16,11:692
- 51821 multiletter control sequences out of 65536+600000
- 87 fonts using 187254327 bytes
- 106i,20n,115p,1878b,766s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 33086 strings out of 478285
+ 305802,1977958 words of node,token memory allocated
+ 3702 words of node memory still in use:
+   12 hlist, 2 vlist, 5 rule, 2 glue, 4 kern, 3 sub_mlist, 1 glyph, 1381 attribute, 63 glue_spec, 138 attribute_list, 2 write, 14 user_defined nodes
+   avail lists: 1:42,2:81558,3:924,4:1066,5:1180,6:176,7:13090,8:92,9:2464,10:16,11:652
+ 51823 multiletter control sequences out of 65536+600000
+ 88 fonts using 187599039 bytes
+ 106i,21n,115p,1878b,766s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/linda/Library/Fonts/Vollkorn-BoldItalic.otf></Users/linda/Library/Fonts/Vollkorn-Italic.otf></Users/linda/Library/Fonts/Vollkorn-Regular.otf></Users/linda/Library/Fonts/Vollkorn-Bold.otf></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Quant Review Calculus and Linear Algebra.pdf (10 pages, 334409 bytes).
+Output written on Quant Review Calculus and Linear Algebra.pdf (11 pages, 354833 bytes).
 
-PDF statistics: 357 PDF objects out of 1000 (max. 8388607)
- 312 compressed objects within 4 object streams
- 98 named destinations out of 1000 (max. 131072)
- 248 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 365 PDF objects out of 1000 (max. 8388607)
+ 319 compressed objects within 4 object streams
+ 105 named destinations out of 1000 (max. 131072)
+ 240 words of extra memory for PDF output out of 10000 (max. 100000000)
 

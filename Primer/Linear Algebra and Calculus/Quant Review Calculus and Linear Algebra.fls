@@ -656,6 +656,8 @@ OUTPUT /Users/linda/Library/texlive/2023/texmf-var/luatex-cache/generic/names/lu
 OUTPUT /Users/linda/Library/texlive/2023/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.luc
 OUTPUT /Users/linda/Library/texlive/2023/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.lua
 OUTPUT /Users/linda/Library/texlive/2023/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.luc
+OUTPUT /Users/linda/Library/texlive/2023/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.lua
+OUTPUT /Users/linda/Library/texlive/2023/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.luc
 INPUT ./Quant Review Calculus and Linear Algebra.aux
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb

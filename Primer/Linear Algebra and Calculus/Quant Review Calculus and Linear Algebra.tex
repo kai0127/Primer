@@ -339,29 +339,29 @@ $$
 $$
 
 \textbf{Example 3:} spherical-Cartesian transformation [ edit ]
-The transformation from spherical coordinates $(\rho, \varphi, \theta)^{[6]}$ to Cartesian coordinates $(x, y, z)$, is given by the function $\mathbf{F}: \mathbf{R}^{+} \times[0, \pi) \times[0,2 \pi) \rightarrow \mathbf{R}^3$ with components:
+The transformation from spherical coordinates $(r, \varphi, \theta)^{[6]}$ to Cartesian coordinates $(x, y, z)$, is given by the function $\mathbf{F}: \mathbf{R}^{+} \times[0, \pi) \times[0,2 \pi) \rightarrow \mathbf{R}^3$ with components:
 $$
     \begin{aligned}
-         & x=\rho \sin \varphi \cos \theta ; \\
-         & y=\rho \sin \varphi \sin \theta ; \\
-         & z=\rho \cos \varphi .
+         & x=r \sin \varphi \cos \theta ; \\
+         & y=r \sin \varphi \sin \theta ; \\
+         & z=r \cos \varphi .
     \end{aligned}
 $$
 The Jacobian matrix for this coordinate change is
 $$
-    \mathbf{J}_{\mathbf{F}}(\rho, \varphi, \theta)=\begin{bmatrix}[1.5]
-        \frac{\partial x}{\partial \rho} & \frac{\partial x}{\partial \varphi} & \frac{\partial x}{\partial \theta} \\
-        \frac{\partial y}{\partial \rho} & \frac{\partial y}{\partial \varphi} & \frac{\partial y}{\partial \theta} \\
-        \frac{\partial z}{\partial \rho} & \frac{\partial z}{\partial \varphi} & \frac{\partial z}{\partial \theta}
+    \mathbf{J}_{\mathbf{F}}(r, \varphi, \theta)=\begin{bmatrix}[1.5]
+        \frac{\partial x}{\partial r} & \frac{\partial x}{\partial \varphi} & \frac{\partial x}{\partial \theta} \\
+        \frac{\partial y}{\partial r} & \frac{\partial y}{\partial \varphi} & \frac{\partial y}{\partial \theta} \\
+        \frac{\partial z}{\partial r} & \frac{\partial z}{\partial \varphi} & \frac{\partial z}{\partial \theta}
     \end{bmatrix}=\left[\begin{array}{ccc}
-            \sin \varphi \cos \theta & \rho \cos \varphi \cos \theta & -\rho \sin \varphi \sin \theta \\
-            \sin \varphi \sin \theta & \rho \cos \varphi \sin \theta & \rho \sin \varphi \cos \theta  \\
-            \cos \varphi             & -\rho \sin \varphi            & 0
+            \sin \varphi \cos \theta & r \cos \varphi \cos \theta & -r \sin \varphi \sin \theta \\
+            \sin \varphi \sin \theta & r \cos \varphi \sin \theta & r \sin \varphi \cos \theta  \\
+            \cos \varphi             & -r \sin \varphi            & 0
         \end{array}\right]
 $$
-The determinant is $\rho^2 \sin \varphi$. Since $d V=d x d y d z$ is the volume for a rectangular differential volume element (because the volume of a rectangular prism is the product of its sides), we can interpret $d V=\rho^2 \sin \varphi d \rho d \varphi d \theta$ as the volume of the spherical differential volume element. Unlike rectangular differential volume element's volume, this differential volume element's volume is not a constant, and varies with coordinates $(\rho$ and $\varphi)$. It can be used to transform integrals between the two coordinate systems:
+The determinant is $r^2 \sin \varphi$. Since $d V=d x d y d z$ is the volume for a rectangular differential volume element (because the volume of a rectangular prism is the product of its sides), we can interpret $d V=r^2 \sin \varphi d r d \varphi d \theta$ as the volume of the spherical differential volume element. Unlike rectangular differential volume element's volume, this differential volume element's volume is not a constant, and varies with coordinates $(r$ and $\varphi)$. It can be used to transform integrals between the two coordinate systems:
 $$
-    \iiint_{\mathbf{F}(U)} f(x, y, z) d x d y d z=\iiint_U f(\rho \sin \varphi \cos \theta, \rho \sin \varphi \sin \theta, \rho \cos \varphi) \rho^2 \sin \varphi d \rho d \varphi d \theta
+    \iiint_{\mathbf{F}(U)} f(x, y, z) d x d y d z=\iiint_U f(r \sin \varphi \cos \theta, r \sin \varphi \sin \theta, r \cos \varphi) r^2 \sin \varphi d r d \varphi d \theta
 $$
 
 \textbf{Example 4:}
@@ -895,7 +895,7 @@ where $A^{\dagger} = (A^\top A)^{-1}A^\top$ is the Moore-Penrose inverse (or pse
         \item \textbf{Orthogonal Basis}: The columns (or rows) of an orthogonal matrix form an orthogonal basis for the vector space.
         \item \textbf{Orthogonal transformations preserve angles \& length}: $(U x)^{\top}(U z)=x^{\top} z$ and $\|U x\|_{2}=\|x\|_{2}$.
 
-        \item Certain matrix norms are also invariant: $\left\|U A V^{\top}\right\|_{2}=\|A\|_{2}$ and $\left\|U A V^{\top}\right\|_{F}=\|A\|_{F}$
+        \item Certain matrix norms are also invariant: $\left\|U A V\right\|_{2}=\|A\|_{2}$ and $\left\|U A V\right\|_{F}=\|A\|_{F}$
 
         \item If $U$ is square, $U^{\top} U=U U^{\top}=I$ and $U^{-1}=U^{\top}$.
 
@@ -1172,66 +1172,222 @@ where $A^{\dagger} = (A^\top A)^{-1}A^\top$ is the Moore-Penrose inverse (or pse
 \headrule
 
 %%%%%%%%%%%%%%%%%%%%%
-\begin{multicols}{2}
-    \section{The Singular Value Decomposition}
-    Every $A \in \mathbb{R}^{m \times n}$ can be factored as
+\section{The Singular Value Decomposition}
+For any matrix $\mathbf{X} \in \mathbb{R}^{m \times n}$, there exist orthogonal matrices $\mathbf{U}$,
+$\mathbf{V}$ and a $m \times n$ diagonal matrix $\boldsymbol{\Sigma}$
+$$
+    \begin{aligned}
+        \mathbf{U}          & =\left[\mathbf{u}_{1}, \ldots, \mathbf{u}_{m}\right] \in \mathbb{R}^{m \times m}                              \\
+        \mathbf{V}          & =\left[\mathbf{v}_{1}, \ldots, \mathbf{v}_{n}\right] \in \mathbb{R}^{n \times n}                              \\
+        \boldsymbol{\Sigma} & =\operatorname{diag}\left(\sigma_{1}, \ldots, \sigma_{p}\right) \in \mathbb{R}^{m \times n}, p:=\min \{m, n\}
+    \end{aligned}
+$$
+with $\sigma_{1} \geq \sigma_{2} \geq \ldots \geq \sigma_{p} \geq 0$, such that
+$$
+    \mathbf{X}=\mathbf{U} \boldsymbol{\Sigma} \mathbf{V}^{\prime}
+$$
+
+To be more specific, matrix $\mathbf{X} \in \mathbb{C}_r^{m \times n}$ can be decomposed as
+
+\begin{align*}
+    \mathbf{X} = \mathbf{U}  \Sigma  \mathbf{V}^{*}
+     & =
+    % U
+    \begin{bmatrix}
+        \color{blue}{\mathbf{U}_{\mathcal{R}}} & \color{red}{\mathbf{U}_{\mathcal{N}}}
+    \end{bmatrix}
+    % Sigma
+    \begin{bmatrix}
+        \begin{array}{cccc|ccc}
+            \sigma_{1} & 0          & \dots  &            &   & \dots  & 0 \\
+            0          & \sigma_{2} &        &            &   &        &   \\
+            \vdots     &            & \ddots &            &   &        &   \\
+                       &            &        & \sigma_{r} &   &        &   \\\hline
+                       &            &        &            & 0 &        &   \\
+            \vdots     &            &        &            &   & \ddots &   \\
+            0          &            &        &            &   &        & 0 \\
+        \end{array}
+    \end{bmatrix}
+    % V
+    \begin{bmatrix}
+        \color{blue}{\mathbf{V}_{\mathcal{R}}}^{*} \\
+        \color{red}{\mathbf{V}_{\mathcal{N}}}^{*}
+    \end{bmatrix}
+    =
+    % U
+    \begin{bmatrix}
+        \color{blue}{u_{1}} & \cdots & \color{blue}{u_{r}} & \color{red}{u_{r+1}} & \dots & \color{red}{u_{m}}
+    \end{bmatrix}
+    % Sigma
+    \begin{bmatrix}
+        \mathbf{S}_{r\times r} & \mathbf{0} \\
+        \mathbf{0}             & \mathbf{0}
+    \end{bmatrix}
+    % V
+    \begin{bmatrix}
+        \color{blue}{v_{1}^{*}}  \\
+        \vdots                   \\
+        \color{blue}{v_{r}^{*}}  \\
+        \color{red}{v_{r+1}^{*}} \\
+        \vdots                   \\
+        \color{red}{v_{n}^{*}}
+    \end{bmatrix} \longrightarrow \text{ \textbf{full SVD} }                                                                                               \\
+     & \xlongequal{\text{ spectral decomposition}}\sum_{i=1}^{r} \sigma_{i} \mathbf{u}_{i} \mathbf{v}_{i}^\top
+    + \sum_{i=r+1}^{p} 0\cdot \mathbf{u}_{i} \mathbf{v}_{i}^\top
+    = {\color{blue}\mathbf{U}_{\mathcal{R}}}\mathbf{S}_{r\times r}{\color{blue}\mathbf{V}_{\mathcal{R}}}^{*} \longrightarrow \text{ \textbf{Compact SVD} } \\
+     & \approx \sum_{i=1}^{k} \sigma_{i} \mathbf{u}_{i} \mathbf{v}_{i}^\top, k\le t \longrightarrow \text{ \textbf{Truncated SVD} }
+\end{align*}
+The $r$ positive singular values are real and ordered (descending) and are the square root of non-zero
+eigenvalues of the product matrices $\mathbf{A}^* \mathbf{A}$ and $\mathbf{A} \mathbf{A}^*$. Please note that the singular values only correspond to range space vectors, i.e., $\color{blue}{\mathbf{U}_{\mathcal{R}}}$ and $\color{blue}{\mathbf{V}_{\mathcal{R}}}$.
+
+\begin{remark}\hfill
+    \begin{enumerate}
+        \item This decomposition is not unique:
+              the singular values part $\Sigma$ is unique;
+              however the signs in the left and right singular vectors can be interchanged.
+              Besides when at least one singular value is zero, there are many possible
+              corresponding singular vectors.
+        \item if $A$ is \textbf{real symmetric} then (spectral theorem) it is diagonalizable and therefore
+              has at least one eigen-decomposition $A=Q \Lambda Q^{-1}=Q \Lambda Q^{\top}$.
+              In general this decomposition is not unique: the eigenvalues part $\Lambda$ is unique;
+              however the eigenvectors part $Q$ is only unique if no eigenvalue is zero.
+    \end{enumerate}
+\end{remark}
+\subsection*{Fundamental Subspaces}
+The column vectors of $\mathbf{U}$ are called \textbf{left singular vectors} and are an orthonormal span of
+$\mathbb{C}^m$ (column space) $\mathbf{C}^{n} =
+    \color{blue}{\mathcal{R} \left( \mathbf{X}^{*} \right)} \oplus
+    \color{red}{\mathcal{N} \left( \mathbf{X} \right)}$.
+
+The column vectors of $\mathbf{V}$ are called \textbf{right singular vectors}
+are an orthonormal span of $\mathbb{C}^n$ (row space) $ \mathbf{C}^{m} =
+    \color{blue}{\mathcal{R} \left( \mathbf{X} \right)} \oplus
+    \color{red} {\mathcal{N} \left( \mathbf{X}^{*} \right)}$.
+
+$$
+    \begin{array}{llll}
+        %
+        \text{ matrix }   &                                                       & \text{ subspace }  & \text{ orthogonal projection matrix } \\
+        \hline\\
+        %
+        \color{blue}{\mathbf{U}_{\mathcal{R}}}\in\mathbb{C}^{m\times r}  &
+        \color{blue}{\mathcal{R}\left(\mathbf{X}\right)}                 & =
+        \text{span}\left\{\color{blue}{u_{1}},\dots,\color{blue}{u_{r}}\right\}
+        &  {\color{blue}\mathbf{U}_{\mathcal{R}}} {\color{blue}\mathbf{U}_{\mathcal{R}}^\top}  \text{ orth proj onto }  {\color{blue}\mathcal{R}\left(\mathbf{X}\right)}  \\
+        %
+        \color{blue}{\mathbf{V}_{\mathcal{R}}}\in\mathbb{C}^{n\times r}  &
+        \color{blue}{\mathcal{R}\left(\mathbf{X}^{*}\right)}             & =
+        \text{span}\left\{\color{blue}{v_{1}},\dots,\color{blue}{v_{r}}\right\}   
+        &  {\color{blue}\mathbf{V}_{\mathcal{R}}} {\color{blue}\mathbf{V}_{\mathcal{R}}^\top}  \text{ orth proj onto }  {\color{blue}\mathcal{R}\left(\mathbf{X}^*\right)}  \\
+        %
+        \color{red}{\mathbf{U}_{\mathcal{N}}}\in\mathbb{C}^{m\times m-r} &
+        \color{red}{\mathcal{N}\left(\mathbf{X^{*}}\right)}              & =
+        \text{span}\left\{\color{red}{u_{r+1}},\dots,\color{red}{u_{m}}\right\} 
+        &  {\color{red}\mathbf{U}_{\mathcal{N}}} {\color{red}\mathbf{U}_{\mathcal{N}}^\top}  \text{ orth proj onto }  {\color{red}\mathcal{N}\left(\mathbf{X^{*}}\right)}     \\
+        %
+        \color{red}{\mathbf{V}_{\mathcal{N}}}\in\mathbb{C}^{n\times n-r} &
+        \color{red}{\mathcal{N}\left(\mathbf{X}\right)}                  & =
+        \text{span}\left\{\color{red}{v_{r+1}},\dots,\color{red}{v_{n}}\right\}  
+        &  {\color{red}\mathbf{V}_{\mathcal{N}}}{\color{red}\mathbf{V}_{\mathcal{N}}^\top}  \text{ orth proj onto }  {\color{red}\mathcal{N}\left(\mathbf{X}\right)}   \\
+    \end{array}
+$$
+The singular value decomposition provides an orthonormal basis for the four fundamental subspaces.
+
+\section*{Properties of the SVD}
+\begin{multicols*}{2}
+
+\textbf{Basics}
+$$
+    \begin{cases}
+        \mathbf{A}^\top\mathbf{A} &=\mathbf{V}\left(\Sigma^\top \Sigma\right) \mathbf{V}^\top \Longrightarrow \mathbf{A}^\top \mathbf{A}\mathbf{V} = \mathbf{V}\left(\Sigma^\top \Sigma\right) \xlongequal{\Sigma^\top \Sigma \text{ diagonal }}\Sigma^\top \Sigma \mathbf{V}\\
+        \mathbf{A}\mathbf{A}^\top &=\mathbf{U}\left(\Sigma \Sigma^\top\right) \mathbf{U}^\top \Longrightarrow \mathbf{A} \mathbf{A}^\top\mathbf{U} = \mathbf{V}\left(\Sigma \Sigma^\top\right) \xlongequal{\Sigma \Sigma^\top \text{ diagonal }}\Sigma \Sigma^\top \mathbf{U}
+    \end{cases}
+$$
+\begin{itemize}
+    \item $ A \mathbf{v}_{i}=\sigma_{i} \mathbf{u}_{i}$ and $A^{\top} \mathbf{u}_{i}=\sigma_{i} \mathbf{v}_{i}$.
+    \item $\operatorname{rank}(A)=\operatorname{rank}\Sigma = r$.
+    \item If $A$ is real symmetric and positive definite, then 
+    $\Sigma$ is a diagonal matrix containing the eigenvalues, and $U=V$.
+
+    \item $\sigma_A^2 = \sigma_{A A^{\top}} = \sigma_{A^{\top} A}$. That is, The singular values of
+          $A^\top A$ and $A A^\top$ are $\sigma_1^2, \ldots, \sigma_n^2$, and thus $\left\|A^\top A\right\|_2 = \left\|A A^\top\right\|_2=\sigma_{\max }^2$.
+    \item The right singular vectors (columns of $V$ ) are eigenvectors of $A^{\top} A$
+    \item The left singular vectors (columns of $U$ ) are eigenvectors of $A A^{\top}$
+\end{itemize}
+
+\textbf{Matrix Norm}
+
+    If $\mathbf{A} \in \mathbb{R}^{m \times n}$ and $p:=\min \{m, n\}$, then the following identities hold
 
     $$
-        \underset{(m \times n)}{A}=\underset{(m \times r)}{U_{1}} \underset{(r \times r)}{\Sigma_{1}} \underset{(n \times r)^{\top}}{V_{1}}^{\top} \quad \text { (economy SVD) }
+        \begin{aligned}
+            \|\mathbf{A}\|_{F}                                            & :=\sqrt{\sum_{i=1, j=1}^{m, n}\left|a_{i j}\right|^{2}}=\sqrt{\sigma_{1}^{2}+\ldots+\sigma_{p}^{2}}, \\
+            \|\mathbf{A}\|_{2}                                            & :=\max \frac{\|\mathbf{A} \mathbf{v}\|_{2}}{\|\mathbf{v}\|_{2}}=\sigma_{1},                          \\
+            \min \frac{\|\mathbf{A} \mathbf{v}\|_{2}}{\|\mathbf{v}\|_{2}} & =\sigma_{n}(m \geq n) .
+        \end{aligned}
     $$
 
-    $U_{1}$ is orthogonal, its columns are the left singular vectors $V_{1}$ is orthogonal, its columns are the right singular vectors $\Sigma_{1}$ is diagonal. $\sigma_{1} \geq \cdots \geq \sigma_{r}>0$ are the singular values
+    \textbf{Eckart-Young Theorem}
 
-    Complete the orthogonal matrices so they become square:
-
-    $$
-        \underset{(m \times n)}{A}=\underset{(m \times m)}{\begin{bmatrix}
-                U_{1} & U_{1}
-            \end{bmatrix}} \underset{(m \times n)}{\begin{bmatrix}
-                \Sigma_{1} & 0 \\
-                0          & 0
-            \end{bmatrix}} \underset{(n \times n)}{\begin{bmatrix}
-                V_{1}^{\top} \\
-                V_{2}^{\top}
-            \end{bmatrix}}=U \Sigma V^{\top} \quad \text { (full SVD) }
-    $$
-
-    The SVD is not unique, but every SVD of $A$ has the same $\Sigma_{1}$.
-
-    \section{Properties of the SVD}
-    Singular vectors $u_{i}, v_{i}$ and singular values $\sigma_{i}$ satisfy
+    Suppose $\mathbf{X}=\sum_{i=1}^{r} \sigma_{i} \mathbf{u}_{i} \mathbf{v}_{i}^{\prime},
+        k<r=\operatorname{rank}(\mathbf{X})$ and denote by $\mathbf{X}_{k}:=\sum_{i=1}^{k} \sigma_{i}
+        \mathbf{u}_{i} \mathbf{v}_{i}^{\prime}$ the $k$-truncated $S V D$ of $\mathbf{X}$.
+    Then $\mathbf{X}_{k}$ is the best rank- $k$ approximation of $\mathbf{X}$ both in the $L^{2}$-norm and the Frobenius norm, that is
 
     $$
-        A v_{i}=\sigma_{i} u_{i} \quad \text { and } \quad A^{\top} u_{i}=\sigma_{i} v_{i}
+        \min _{\mathbf{Y} \text { s.t. } \operatorname{rank}(\mathbf{Y})=k}\|\mathbf{X}-\mathbf{Y}\|_{2}=\left\|\mathbf{X}-\mathbf{X}_{k}\right\|_{2}=\sigma_{k+1}
+    $$
+    and
+    $$
+        \min _{\mathbf{Y} \text { s.t. } \operatorname{rank}(\mathbf{Y})=k}\|\mathbf{X}-\mathbf{Y}\|_{F}^{2}=\left\|\mathbf{X}-\mathbf{X}_{k}\right\|_{F}^{2}=\sum_{k+1}^{N} \sigma_{i}^{2}
     $$
 
-    Suppose $A=U \Sigma V^{\top}$ (full SVD) as in previous slide.
 
-    \begin{itemize}
-        \item rank: $
-                  \operatorname{rank}(A)=r$
+    \textbf{SVD and Linear Regression}
 
-        \item transpose: $A^{\top}=V \Sigma U^{\top}$
+    Suppose $\mathbf{b} \in \mathbb{R}^{m}$ and $\mathbf{A}=\mathbf{U} \boldsymbol{\Sigma} \mathbf{V}^{\prime} \in \mathbb{R}^{m \times n}$ with $r=\operatorname{rank}(\mathbf{A})$ and
+    $$
+        \begin{aligned}
+            \mathbf{U} & =\left[\mathbf{u}_{1}, \ldots, \mathbf{u}_{m}\right] \\
+            \mathbf{V} & =\left[\mathbf{v}_{1}, \ldots, \mathbf{v}_{n}\right]
+        \end{aligned}
+    $$
+    Then
+    $$
+        \mathbf{x}^{*} = \arg \min _{\mathbf{x}}\|\mathbf{A x}-\mathbf{b}\|_{2} = \sum_{i=1}^{r} \frac{\mathbf{u}_{i}^{\prime} \mathbf{b}}{\sigma_{i}} \mathbf{v}_{i}
+    $$
+    and
+    $$
+        \left\|\mathbf{A} \mathbf{x}^{*}-\mathbf{b}\right\|_{2}^{2}=\sum_{i=r+1}^{m}\left(\mathbf{u}_{i}^{\prime} \mathbf{b}\right)^{2}
+    $$
 
-        \item pseudoinverse: $A^{\dagger}=V_{1} \Sigma_{1}^{-1} U_{1}^{\top}$
+    \textbf{The Moore-Penrose Generalized Inverse}
 
-    \end{itemize}
+    Suppose $\mathbf{A}=\mathbf{U} \boldsymbol{\Sigma} \mathbf{V}^{\prime}=\sum_{i=1}^{r} \sigma_{i} \mathbf{u}_{i} \mathbf{v}_{i}$ with $r=\operatorname{rank}(\mathbf{A})$. Then we define the Moore-Penrose inverse of $\mathbf{A}$ by
+    $$
+        \mathbf{A}^\dagger:=\mathbf{V} \boldsymbol{\Sigma}^\dagger \mathbf{U}^{\prime}
+    $$
+    where
+    $$
+        \boldsymbol{\Sigma}^\dagger=\left(\Sigma^\top \Sigma\right)^{-1} \Sigma^\top=\operatorname{diag}\left(\sigma_{1}^{-1}, \ldots, \sigma_{r}^{-1}, 0, \ldots, 0\right) \in \mathbb{R}^{n \times m}
+    $$
 
-    Fundamental subspaces:
+    It is easy to verify that $\mathbf{A}^{+}$satisfies the four Moore-Penrose conditions
 
-    \begin{itemize}
-        \item $R\left(U_{1}\right)=R(A)$ and $R\left(U_{2}\right)=R(A)^{\perp} \quad$ (range of $A$ )
+    $$
+    \mathbf{A} \mathbf{A}^{+} \mathbf{A} =\mathbf{A}, \mathbf{A}^{+} \mathbf{A} \mathbf{A}^{+} =\mathbf{A}^{+},
+    \left(\mathbf{A A}^{+}\right)^{\prime}  =\mathbf{A A}^{+}, \left(\mathbf{A}^{+} \mathbf{A}\right)^{\prime} =\mathbf{A}^{+} \mathbf{A}
+    $$
+    \begin{remark}
+        There is an infinite number of ways in which one can define a pseudo inverse. 
+        What makes the Moore-Penrose inverse useful is that it is {\color{blue}unique}. 
+        In other words, there is no other inverse that satisfies the Moore-Penrose conditions above.
 
-        \item $R\left(V_{1}\right)=N(A)^{\perp}$ and $R\left(V_{2}\right)=N(A) \quad$ (nullspace of $A$ )
+    Note that from the Moore-Penrose conditions it follows that $\mathbf{A A}^{+}$ and $\mathbf{A}^{+} \mathbf{A}$ are orthogonal projections onto range $(\mathbf{A})$ and range $\left(\mathbf{A}^{\prime}\right)$, respectively.
 
-    \end{itemize}
+    \end{remark}
+    \end{multicols*}
 
-    Matrix norms:
-
-    \begin{itemize}
-        \item $\|A\|_{2}=\sigma_{1} \quad$ and $\quad\|A\|_{F}=\sqrt{\sigma_{1}^{2}+\cdots+\sigma_{r}^{2}}$
-    \end{itemize}
-\end{multicols}
 %%%%%%%%%%%%%%%%%%%%%
 
 \headrule
@@ -1383,6 +1539,33 @@ where $A^{\dagger} = (A^\top A)^{-1}A^\top$ is the Moore-Penrose inverse (or pse
               \]
     \end{enumerate}
 
+\end{solution}
+\begin{problem}
+2-norm of orthogonal transformation of a matrix is invariant:
+For any matrix $A$ and an orthogonal matrix $Q$, we have
+$$
+    \|Q A\|_2=\|A\|_2 \text{ and } \|AQ\|_2=\|A\|_2
+$$
+\end{problem}
+
+\begin{solution}
+    For the first equation, we have
+    $$
+        \|Q A\|_2^2=(Q A x)^T(Q A x)=(A x)^T(A x)=\|A\|_2^2
+    $$
+    For the second equation, recall that the 2-norm for matrices is defined as
+    $$
+        \|B\|_2=\sup _{\|x\|=1}\|B x\| .
+    $$
+    But for any orthogonal matrix $Q$ we have that $\|Q x\|=\|x\|$. Thus, we can write
+    $$
+        \|A Q\|_2=\sup _{\|x\|=1}\|A Q x\|=\sup _{\|Q x\|=1}\|A Q x\|=\sup _{\|y\|=1}\|A y\|=\|A\|_2 .
+    $$
+
+    Together, if $U, V$ are comformable and orthogonal, then we have
+    $$
+        \|UAV\|_2 = \|A\|_2
+    $$
 \end{solution}
 
 \begin{theorem}
