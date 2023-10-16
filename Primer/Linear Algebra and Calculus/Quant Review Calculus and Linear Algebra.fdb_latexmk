@@ -1,6 +1,6 @@
 # Fdb version 4
-["lualatex"] 1696966852 "/Users/linda/Desktop/LaTeX/Primer/Linear Algebra and Calculus/Quant Review Calculus and Linear Algebra.tex" "Quant Review Calculus and Linear Algebra.pdf" "Quant Review Calculus and Linear Algebra" 1696966860 0
-  "/Users/linda/Desktop/LaTeX/Primer/Linear Algebra and Calculus/Quant Review Calculus and Linear Algebra.tex" 1696966852 78758 ac8c391e7e8b0a39542b029040d47359 ""
+["lualatex"] 1697187762 "/Users/linda/Desktop/LaTeX/Primer/Linear Algebra and Calculus/Quant Review Calculus and Linear Algebra.tex" "Quant Review Calculus and Linear Algebra.pdf" "Quant Review Calculus and Linear Algebra" 1697187769 0
+  "/Users/linda/Desktop/LaTeX/Primer/Linear Algebra and Calculus/Quant Review Calculus and Linear Algebra.tex" 1697187761 78839 5bc9093059e3780929e790a72c01d6ac ""
   "/Users/linda/Library/Fonts/Vollkorn-Bold.otf" 1525855805 504600 83467cfa4400474b6d068d7d268da90e ""
   "/Users/linda/Library/Fonts/Vollkorn-BoldItalic.otf" 1525854575 420332 111db9d7a31febd45ac0bb50a2052414 ""
   "/Users/linda/Library/Fonts/Vollkorn-Italic.otf" 1525854575 411584 7b726e6369ee5630e2928aa5b34d2154 ""
@@ -15,7 +15,7 @@
   "/Users/linda/Library/texlive/2023/texmf-var/luatex-cache/generic/fonts/otl/vollkorn-bolditalic.luc" 1696149711 663190 b66ca3d1e185396479b45a41e5249300 ""
   "/Users/linda/Library/texlive/2023/texmf-var/luatex-cache/generic/fonts/otl/vollkorn-italic.luc" 1696149711 531537 6ba2912c381ac826b2bb56e86971eb6d ""
   "/Users/linda/Library/texlive/2023/texmf-var/luatex-cache/generic/fonts/otl/vollkorn-regular.luc" 1696149708 659234 daaa00f77c1f75da2f00f807a7763652 ""
-  "/Users/linda/Library/texlive/2023/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.luc" 1696966859 3394 e57729eaec26a8072c3f7dd277e9349d "lualatex"
+  "/Users/linda/Library/texlive/2023/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.luc" 1697187768 3394 e57729eaec26a8072c3f7dd277e9349d "lualatex"
   "/Users/linda/Library/texlive/2023/texmf-var/luatex-cache/generic/names/luaotfload-names.luc.gz" 1696942012 370726 2d664aaa1aa6ab8002b2b9ce556a7a6b ""
   "/Users/linda/Library/texlive/2023/texmf-var/luatexja/extra_babelstonehan.luc" 1696045430 1667274 857e1839817ad440d2ac976e3c10929c ""
   "/Users/linda/Library/texlive/2023/texmf-var/luatexja/extra_copperplategothic-bold.luc" 1696942012 5448 30c05a93e1ebd124d3cb165a9710c08e ""
@@ -325,10 +325,10 @@
   "/usr/local/texlive/2023/texmf-dist/tex/luatex/luatexja/patches/lltjp-listings.sty" 1653941231 14914 340890023fe5b05f4034feae149cab10 ""
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1696053482 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/luahbtex/lualatex.fmt" 1694803921 11876210 49080bdcf9fb115e6dd63b7a21cafe03 ""
-  "Quant Review Calculus and Linear Algebra.aux" 1696966859 4373 c2959a598a80e1117c3e963e9ffa9a3f "lualatex"
-  "Quant Review Calculus and Linear Algebra.out" 1696966859 3850 d302326246e4f09ae9cf309d54809864 "lualatex"
-  "Quant Review Calculus and Linear Algebra.tex" 1696966852 78758 ac8c391e7e8b0a39542b029040d47359 ""
-  "Quant Review Calculus and Linear Algebra.toc" 1696966859 2136 fc5bbd38237bf97feeb00c989983b741 "lualatex"
+  "Quant Review Calculus and Linear Algebra.aux" 1697187768 4373 c2959a598a80e1117c3e963e9ffa9a3f "lualatex"
+  "Quant Review Calculus and Linear Algebra.out" 1697187768 3850 d302326246e4f09ae9cf309d54809864 "lualatex"
+  "Quant Review Calculus and Linear Algebra.tex" 1697187761 78839 5bc9093059e3780929e790a72c01d6ac ""
+  "Quant Review Calculus and Linear Algebra.toc" 1697187768 2136 fc5bbd38237bf97feeb00c989983b741 "lualatex"
   "inverse.png" 1696942912 106954 3ccb94170ae41b664725b3cfd1986f46 ""
   (generated)
   "/Users/linda/Library/texlive/2023/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.lua"

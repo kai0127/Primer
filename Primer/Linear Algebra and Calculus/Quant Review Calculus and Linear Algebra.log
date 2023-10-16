@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.9.15)  10 OCT 2023 15:40
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.9.15)  13 OCT 2023 05:02
  restricted system commands enabled.
  file:line:error style messages enabled.
 **"/Users/linda/Desktop/LaTeX/Primer/Linear Algebra and Calculus/Quant Review Calculus and Linear Algebra.tex"
@@ -1331,22 +1331,22 @@ LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
 (Font)              No change on input line 1067.
  [8] [9] [10]
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
-(Font)              No change on input line 1424.
+(Font)              No change on input line 1425.
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
-(Font)              No change on input line 1441.
+(Font)              No change on input line 1442.
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
-(Font)              No change on input line 1462.
+(Font)              No change on input line 1463.
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
-(Font)              No change on input line 1469.
+(Font)              No change on input line 1470.
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
-(Font)              No change on input line 1480.
+(Font)              No change on input line 1481.
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
-(Font)              No change on input line 1500.
+(Font)              No change on input line 1501.
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
-(Font)              No change on input line 1517.
+(Font)              No change on input line 1518.
  [11]
 LaTeX Font Info:    Kanji font shape `JY3/BabelStoneHan(0)/m/it' undefined
-(Font)              No change on input line 1589.
+(Font)              No change on input line 1590.
  [12] ("./Quant Review Calculus and Linear Algebra.aux")
 Package rerunfilecheck Info: File `"Quant Review Calculus and Linear Algebra".out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
@@ -1362,7 +1362,7 @@ Here is how much of LuaTeX's memory you used:
  88 fonts using 187599039 bytes
  106i,21n,115p,1878b,766s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/linda/Library/Fonts/Vollkorn-BoldItalic.otf></Users/linda/Library/Fonts/Vollkorn-Italic.otf></Users/linda/Library/Fonts/Vollkorn-Regular.otf></Users/linda/Library/Fonts/Vollkorn-Bold.otf></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Quant Review Calculus and Linear Algebra.pdf (12 pages, 358008 bytes).
+Output written on Quant Review Calculus and Linear Algebra.pdf (12 pages, 358057 bytes).
 
 PDF statistics: 372 PDF objects out of 1000 (max. 8388607)
  325 compressed objects within 4 object streams
