@@ -1,0 +1,962 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amsthm,amssymb}
+
+%%%%% Matrix stretcher
+% use it as:
+%\begin{pmatrix}[1.5]
+% ...
+\makeatletter
+\renewcommand*\env@matrix[1][\arraystretch]{%
+  \edef\arraystretch{#1}%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols c}}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand\extrafootertext[1]{%
+    \bgroup
+    \renewcommand\thefootnote{\fnsymbol{footnote}}%
+    \renewcommand\thempfootnote{\fnsymbol{mpfootnote}}%
+    \footnotetext[0]{#1}%
+    \egroup
+}
+
+
+%%%%%%%%%%%%% Colors %%%%%%%%%%%%%
+\usepackage[dvipsnames]{xcolor}
+
+\definecolor{C0}{HTML}{1d1d1d}
+\definecolor{C1}{HTML}{1e3668}
+\definecolor{C2}{HTML}{199d8b}
+\definecolor{C3}{HTML}{d52f4c}
+\definecolor{C4}{HTML}{5ab2d6}
+\definecolor{C5}{HTML}{ffb268}
+\definecolor{C6}{HTML}{ff7300} % for commenting - {fire orange}dd571c
+\definecolor{C7}{HTML}{777b7e} % for remarks - {steel grey}
+\color{C0}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%% Fonts %%%%%%%%%%%%% 
+%\usepackage{fontspec}
+\usepackage[no-math]{fontspec} % for text
+
+\emergencystretch=8pt
+\hyphenpenalty=1000 % default 50
+\tolerance=800      % default 200
+%\righthyphenmin=4
+%\lefthyphenmin=4
+
+%%% Text Font: Vollkorn + Math Font: Latin Modern (default) %%%
+\setmainfont{Vollkorn}[
+UprightFont = Vollkorn-Regular,
+ItalicFont =Vollkorn-Italic, 
+BoldItalicFont={Vollkorn-BoldItalic},
+BoldFont = Vollkorn-Bold,
+RawFeature=+lnum,
+WordSpace=1.7,
+] 
+
+%%% We need this for math font packages other than latin modern %%%
+% \usepackage{unicode-math}        % for math
+
+%%% Text Font: Palatino + Math Font: Asana-Math %%%
+%\setmainfont{Palatino}[
+%BoldFont = Palatino-Bold,
+%ItalicFont = Palatino-Italic,
+%BoldItalicFont={Palatino-BoldItalic},
+%RawFeature=+lnum,
+%WordSpace=1.7,
+%]
+%\setmathfont{asana-math}
+
+%%% Text Font: Arno Pro + Math Font: Minion Pro %%%
+%\setmainfont{Arno Pro}[
+%UprightFont = *-Regular,
+%ItalicFont = Vollkorn-Italic, 
+%BoldItalicFont={*-BoldItalic},
+%BoldFont = *-Bold,
+%RawFeature=+lnum,
+%WordSpace=1.7,
+%Scale= 1.1
+%] 
+% Minion Pro is too expensive
+
+%%% Math Fonts %%%
+%\setmathfont{Vollkorn}
+%\setmathfont{Latin Modern Math}
+%\setmathfont{TeX Gyre Pagella Math}
+%\setmathfont{TeX Gyre Termes Math}
+%\setmathfont{TeX Gyre DejaVu Math}
+%\setmathfont[Scale=MatchLowercase]{DejaVu Math TeX Gyre}
+%\setmathfont{XITS Math}
+%\setmathfont{Libertinus Math}
+%\setmathfont[Scale=MatchUppercase]{Asana Math}
+%\setmathfont{STIX Two Math}
+
+%\usepackage{kpfonts-otf}
+%\setmathfont{KpMath-Regular.otf}[version=regular]
+%\setmathfont{KpMath-Bold.otf}[version=bold]
+%\setmathfont{KpMath-Semibold.otf}[version=semibold]
+%\setmathfont{KpMath-Sans.otf}[version=sans]
+%\setmathfont{KpMath-Light.otf}[version=light]
+
+
+%%% CJK Fonts %%%
+\usepackage[scale=.78]{luatexja-fontspec}
+\setmainjfont{BabelStone Han}[AutoFakeBold]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% This package simplifies the insertion of external multi-page PDF or PS documents.
+\usepackage{pdfpages}
+
+% cref
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=C4,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    }
+
+\usepackage[nameinlink,noabbrev,capitalize]{cleveref}
+% \crefname{ineq}{}{}
+% \crefname{equation}{}{}
+% \creflabelformat{ineq}{#2{\textup{(1)}}#3}
+% \creflabelformat{equation}{#2\textup{(#1)}#3}
+
+%%%%%%%%%%%%% Environments %%%%%%%%%%%%%%%%
+%amsthm has three separate predefined styles:	
+%
+%\theoremstyle{plain} is the default. it sets the text in italic and adds extra space above and below the \newtheorems listed below it in the input. it is recommended for theorems, corollaries, lemmas, propositions, conjectures, criteria, and (possibly; depends on the subject area) algorithms.
+%
+%\theoremstyle{definition} adds extra space above and below, but sets the text in roman. it is recommended for definitions, conditions, problems, and examples; i've alse seen it used for exercises.
+%
+%\theoremstyle{remark} is set in roman, with no additional space above or below. it is recommended for remarks, notes, notation, claims, summaries, acknowledgments, cases, and conclusions.
+
+%%%  theorem-like environment %%%
+\theoremstyle{plain} % default theorem style
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{property}[theorem]{Property}
+
+\newtheorem{definition}[theorem]{Definition}
+
+%%% definition-like environment %%%
+%\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{problem}[theorem]{Problem}
+
+
+%%% framed package is great %%%
+\usepackage{framed}
+\newenvironment{solution}
+{\color{C2}\normalfont\begin{framed}\begingroup\textbf{Solution:} }
+  {\endgroup\end{framed}}
+  
+\newenvironment{topic}
+{\color{C2}\normalfont\begin{framed}\begingroup }
+  {\endgroup\end{framed}}
+  
+\newtheoremstyle{remark}% name of the style to be used
+  {}% measure of space to leave above the theorem. E.g.: 3pt
+  {}% measure of space to leave below the theorem. E.g.: 3pt
+  {\color{C3}}% name of font to use in the body of the theorem
+  {}% measure of space to indent
+  {\color{C3}\bfseries}% name of head font
+  {.}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {}
+\theoremstyle{remark}
+\newtheorem{remarkx}[theorem]{Remark}
+\newenvironment{remark}
+  {\pushQED{\qed}\renewcommand{\qedsymbol}{$\triangle$}\remarkx}
+  {\popQED\endremarkx}
+  
+\newenvironment{point}
+  {\O~~}
+  {}
+
+\usepackage{thmtools}
+\usepackage{thm-restate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% This package is for the long equal sign \xlongequal{}
+\usepackage{extarrows}
+
+%%%%%%%%%%%% Algorithms %%%%%%%%%%%%
+\usepackage{etoolbox} 
+\usepackage{setspace}
+\usepackage{algorithm}
+\AtBeginEnvironment{algorithmic}{\onehalfspacing}
+\usepackage{algorithmicx}
+\usepackage[noend]{algpseudocode}
+
+\algrenewcommand\algorithmicindent{1.0em}
+\let\Algorithm\algorithm
+\renewcommand\algorithm[1][]{\Algorithm[#1]}%\fontsize{11}{16}\selectfont}
+
+\newenvironment{labelalgorithm}[4][t]{%
+\begin{algorithm}[#1]
+%\newcommand{\thealgorithmlabel}{#2}
+\newcommand{\thealgorithmname}{#3}
+%\newcommand{\thealgorithmcap}{#4}
+\customlabel{alg:name:#2}{\textproc{#3}}
+%\customlabel{alg:cap:#2}{#4}
+\caption{#4}\label{alg:#2}
+}{\end{algorithm}}
+
+
+\makeatletter
+\newcommand{\customlabel}[2]{%
+   \protected@write \@auxout {}{\string \newlabel {#1}{{#2}{\thepage}{#2}{#1}{}} }%
+   \hypertarget{#1}{}%
+}
+\makeatother
+
+
+%\algdef{SE}[FUNCTION]{Procedure}{EndProcedure}%
+%   [2]{\algorithmicclass\ \textproc{#1}\ifthenelse{\equal{#2}{}}{}{$($#2$)$}}%
+%   {\algorithmicend\ \algorithmicclass}%
+
+\algnewcommand\algorithmicclass{\textbf{class}}
+\algdef{SE}[FUNCTION]{Class}{EndClass}%
+   [2]{\algorithmicclass\ \textproc{#1}\ifthenelse{\equal{#2}{}}{}{$($#2$)$}}%
+   {\algorithmicend\ \algorithmicclass}%
+
+% Tells algorithmicx not to print an empty line if `noend' is set 
+\makeatletter
+\ifthenelse{\equal{\ALG@noend}{t}}%
+  {\algtext*{EndClass}}
+  {}%
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Page Formatting
+\usepackage[
+    paper=a3paper,
+    inner=22mm,         % Inner margin
+    outer=22mm,         % Outer margin
+    bindingoffset=0mm, % Binding offset
+    top=28mm,           % Top margin
+    bottom=22mm,        % Bottom margin
+    %showframe,         % show how the type block is set on the page
+]{geometry}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{.7em}
+
+
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\setlist{topsep=0pt}
+
+\usepackage{bm}
+
+\usepackage[font=scriptsize,labelfont=bf]{caption}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,breaklines=true}
+% \setlength{\parskip}{1em}
+% \setlength{\parindent}{0em}
+\usepackage{dsfont}
+\newcommand{\bOne}{\mathds{1}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\VV}{\mathbb{V}}
+\newcommand{\CoV}{\operatorname{Co\mathbb{V}}}
+
+% header
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[L]{\small   \bfseries Notes}
+\fancyhead[C]{\small   \bfseries Fall 2023}
+\fancyhead[R]{\small   \bfseries Zhou}
+
+
+\begin{document}
+
+\begin{center}
+  \text{\Large{Unconstrained Non-Linear Programs
+    }}
+
+  {\text{Kaiwen Zhou}}
+\end{center}
+\vspace{2em}
+
+\tableofcontents
+
+\section*{Topic: Primer}
+\begin{lemma}\label{lemma: Sherman-Morrison}
+  Sherman-Morrison formula:
+  $$
+    \left(\mathbf{A} + \mathbf{a} \mathbf{b}^{\top}\right)^{-1} = \mathbf{A}^{-1} - \frac{\mathbf{A}^{-1} \mathbf{a} \mathbf{b}^{\top} \mathbf{A}^{-1}}{1 + \mathbf{b}^{\top} \mathbf{A}^{-1} \mathbf{a}}
+  $$
+\end{lemma}
+
+\begin{definition}
+  A sequence $\left\{\mathbf{x}_k\right\}_{k=0}^{\infty} \in \mathbb{R}^n$ converging to $\mathbf{x}^*$ is $q$-linearly convergent with order of convergence $q$ and rate of convergence $\mu \ge 0$ if:
+  $$
+    \lim _{k \rightarrow \infty} \frac{\left\|\mathbf{x}_{k+1}-\mathbf{x}^*\right\|}{\left\|\mathbf{x}_k-\mathbf{x}^*\right\|^q}=\mu<\infty .
+  $$
+  \textbf{Important terminology for special cases:}
+  \begin{itemize}
+    \item $q=1$ \textit{linearly convergent}, approximately one digit per iteration.
+    \item $q=2$ \textit{quadratically convergent}
+    \item $q=3$ \textit{cubically convergent}
+    \item $q=1, \mu=0$ \textit{super linear convergent}, quicker than vanilla linear convergent.
+    \item For $q=1$,
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  A function $f$ is Lipschitz continuous if there exists some $L$ s.t. $\forall x, y \in \mathbb{R}$, we have
+  $$
+    \|f(x)-f(y)\|=L\|x-y\|
+  $$
+\end{definition}
+
+\newpage
+\section{Topic: Newton's Method}
+\subsection{One Dimensional Newton's Method}
+
+\begin{topic}
+  The Newton's method only applies when $f(x)$ is a differentiable function. We start with an initial guess $x_0$, the closer to $x^*$ the better.
+  Then, we calculate the derivative $f^{\prime}(x_0)$ at the guess point and have the following iteration scheme:
+
+  \textbf{Iteration Scheme}: Suppose we have $x_n$ and $x^* = x_n + \delta_n$. Then, we have
+  $$
+    0 = f(x^*) = f(x_n+\delta_n) = f(x_n) + f'(x_n)\delta_n + O(\|\delta_n\|^2)\quad \Longrightarrow \quad \delta_n = -\frac{f(x_n)}{f'(x_n)} + O(\|\delta_n\|^2)
+  $$
+  We approximate $\delta_n$ with $-\frac{f(x_n)}{f'(x_n)}$ and obtain
+  $$
+    x^* \approx x_{n+1} = x_n -\frac{f(x_n)}{f'(x_n)}
+  $$
+  Repeat the process until the value of $f(x_{n+1})$ gets sufficiently close to zero or until a desired level of accuracy is reached.
+
+  \textbf{Quadratic Convergence:}
+  $$
+    \delta_{n+1} = x^* - x_{n+1} =  (x_n + \delta_n) - x_n + \frac{f(x_n)}{f'(x_n)} = O(\|\delta_n\|^2) = \frac{1}{2}\left|\frac{f''(\eta_k)}{f'(x_n)}\right|\delta_n^2 \quad \Longrightarrow \quad |\delta_{n+1}| \le \frac{1}{2}\left|\frac{f''(\eta_k)}{f'(x_n)}\right| |\delta_n|^2 \quad \longrightarrow \quad\text{quadratic convergence}
+  $$
+  \textbf{Conditions for Convergence:}
+  \begin{enumerate}
+    \item $f$ is $C^2$ on interval $[x^* - \delta, x^* + \delta], \delta > 0$ and that $f(x^*) = 0$ and $f''(x^*) \ne 0$.
+    \item There exists $A>0$ such that $\left|\frac{f''(\eta_k)}{f'(x_n)}\right|\le A$ for all $x,y\in [x^* - \delta, x^* + \delta]$.
+    \item If $|x^* - x_0| \le h$ where $h \le \delta, \frac{1}{A}$, then the sequence $\{x_k\}$ defined by Newton's method converges quadratically to $x^*$.
+  \end{enumerate}
+
+  \textbf{Note:}
+
+  By the conditions for convergence, it can be concluded that: for any function that is tangent to the $x$-axis, Newton's method fails. This is because it breaks the condition \# 2, since $f'(x^*) = 0$.
+
+  \textbf{Optimization Problem:} For the optimization problem $f^{\prime}(x)=0$, the Newton's method yields the following iteration scheme:
+  $$
+    x_{n + 1}=x_n-\frac{f^{\prime}\left(x_n\right)}{f^{\prime \prime}\left(x_n\right)}
+  $$
+\end{topic}
+
+\subsection{Multivariate Newton}
+\begin{topic}
+  \textbf{Root-Finding Problem:} Solve $\mathbf{F}(\mathbf{x})=\boldsymbol{0} , \mathbf{F}:\mathbb{R}^n \rightarrow \mathbb{R}^m$.
+
+  Suppose $\mathbf{x}^* \approx \mathbf{x}_{n+1} = \mathbf{x}_n+\delta \mathbf{x}$ We have
+  $$
+    0=\mathbf{F}\left(\mathbf{x}^*\right)\approx\mathbf{F}\left(\mathbf{x}_n+\delta \mathbf{x}\right)=\mathbf{F}\left(\mathbf{x}_n\right)+\mathcal{D} \mathbf{F}\left(\mathbf{x}_n\right) \delta \mathbf{x}+O(\|\delta \mathbf{x}\|^2)
+  $$
+  solve for $\delta \mathbf{x}$ and we obtain the Newton iteration scheme:
+  $$
+    \mathbf{x}_{n+1}=\mathbf{x}_n-\left(\mathcal{\mathcal{D}} \mathbf{F}\left(\mathbf{x}_n\right)^{\top} \mathcal{D} \mathbf{F}\left(\mathbf{x}_n\right)\right)^{-1} \mathcal{D} \mathbf{F}\left(\mathbf{x}_n\right) \mathbf{F}\left(\mathbf{x}_n\right)
+    = \left[\mathcal{D} \mathbf{F}\left(\mathbf{x}_n\right)\right]^\dagger\mathbf{F}\left(\mathbf{x}_n\right)
+  $$
+  where $\left[\mathcal{D} \mathbf{F}\left(\mathbf{x}_n\right)\right]^\dagger := \left(\mathcal{\mathcal{D}} \mathbf{F}\left(\mathbf{x}_n\right)^{\top} \mathcal{D} \mathbf{F}\left(\mathbf{x}_n\right)\right)^{-1} \mathcal{D} \mathbf{F}\left(\mathbf{x}_n\right)$.
+
+
+  \textbf{Optimization Problem:} Find $\mathbf{x}$ such that $\nabla f= 0$,  $f: \mathbb{R}^N \rightarrow \mathbb{R}$.
+  Similarly, the Newton iteration scheme gives:
+  $$
+    \mathbf{x}_{n+1}=\mathbf{x}_n-\left(\nabla^2 f\left(\mathbf{x}_n\right)\right)^{-1} \nabla f\left(\mathbf{x}_n\right)
+    \quad \text{ where } \quad
+    \nabla^2 f=\left[\frac{\partial \nabla f}{\partial x_1}, \cdots \frac{\partial \nabla f}{\partial x_n}\right], \nabla f=\left[\begin{array}{c}
+        \frac{\partial f}{\partial x_1} \\
+        \vdots                          \\
+        \frac{\partial f}{\partial x_n}
+      \end{array}\right]
+  $$
+  and $\nabla^2 f\left(\mathbf{x}_n\right)$ is the corresponding Hessian matrix.
+
+  \textbf{Modified Newton's Method:}
+
+  We need the Newton's step $\mathbf{p}_n = -\left[\nabla^2 f(\mathbf{x}_n)\right]^{-1} \nabla f(\mathbf{x}_n)$
+  to points to the descent direction, i.e. to satisfy $\nabla f(\mathbf{x}_n) \cdot \mathbf{p}_n < 0$, which amount to
+  the Hessian matrix in the Newton's step being positive definite. This is becasue
+  $$
+    \nabla^\top f(\mathbf{x}_n) \mathbf{p}_n
+    = -\nabla^{\top} f(\mathbf{x}_n)\left[\nabla^2 f(\mathbf{x}_n)\right]^{-1} \nabla f(\mathbf{x}_n) < 0
+    \quad \Longleftrightarrow \quad
+    \left[\nabla^2 f(\mathbf{x}_n)\right]^{-1} \text{ is positive definite.}
+  $$
+  However, this is not always the case, and we will try to modify our scheme to
+  accomodate. The idea of modifying Newton's Method is simple and similar to
+  that of the ridge regression: if $\nabla^2 f(\mathbf{x}_n)$ is not positive
+  definite, we then add some diagonal matrix with nonnegative diagonal entries
+  to it. Suppose \((\lambda, \mathbf{u})\) is an eigen-pair of a matrix
+  \(\mathbf{A} = \nabla^2 f(\mathbf{x}_n)\), then let \(\alpha \in \mathbb{R}^+\), we obtain
+  $$
+    (\mathbf{A}+\alpha \mathbf{I}) \mathbf{u} =
+    \mathbf{A} \mathbf{u} + \alpha \mathbf{u}= \lambda \mathbf{u} + \alpha \mathbf{u} = (\lambda + \alpha) \mathbf{u}
+    \quad \Longrightarrow \quad
+    \text{eventually modified eigenvalues } \lambda_{new} = \lambda + \alpha \text{ of } \nabla^2 f(\mathbf{x}_n) \text{ will all be positive }
+  $$
+
+  Actually, if \(\nabla^2 f(\mathbf{x}_n)\) is positive definite, then so is
+  \(\left[\nabla^2 f(\mathbf{x}_n)\right]^{-1}\) why? Let \((\lambda,
+  \mathbf{u})\) be an eigen-pair of \(\nabla^2 f(\mathbf{x}_n)\) where $\lambda>0$:
+  $$
+    \nabla^2 f(\mathbf{x}_n) \mathbf{u} = \lambda \mathbf{u}
+    \quad \Longrightarrow \quad
+    \lambda^{-1} \mathbf{u} = \left[\nabla^2 f(\mathbf{x}_n)\right]^{-1} \mathbf{u}
+    \quad \Longrightarrow \quad
+    \text{ all eigenvalues } \lambda^{-1} \text{ of } \left[\nabla^2 f(\mathbf{x}_n)\right]^{-1} \text{ are positive }
+  $$
+
+  \textbf{Kantonovich theorem ---- quadratic convergence of Newton's Method:}
+
+  We want to minimize \( f: \mathbb{R}^n \rightarrow \mathbb{R} \) let \(
+  \mathbf{x}^* \) be a local minimum of \( f \), and assume the sequence of
+  Newton iterates \( \left\{\mathbf{x}_k\right\}_{k=0}^{\infty} \in \mathbb{R}^n
+  \) converges to \( \mathbf{x}^* \), let \( S \subset \mathbb{R}^n \) which is
+  open and convex and st. \( \mathbf{x}^* \in S \). Assume that \( f \) is \(
+  C^2 \) on \( S \), and for \( \mathbf{x} \in S \), \( \nabla^2 f(\mathbf{x}) \)
+  is Lipschitz-continuous with Lipchitz constant \( L<\infty \) (i.e. $\forall x, y \in S$ we have
+  $\left\|\nabla^2 f(x)-\nabla^2 f(y)\right\| \leq L\|x-y\|$). Assume \(
+  \nabla^2 f \) is positive definite on \( S \) . And finally, if \(
+  \mathbf{x}_0 \) is "close enough" to \( \mathbf{x}^* \), then \( \mathbf{x}_k
+  \rightarrow \mathbf{x}^* \) quadratically.
+
+  \textbf{Note:} $S$ convex, $\nabla^2 f$ positive definite on $S$ and
+  $\mathbf{x}^*$ a local $\min \Rightarrow \mathbf{x}^*$ global min on $S$.
+
+
+  \textbf{Another theorem:}
+
+  If instead of Newton's method, you use the iteration $\mathbf{x}_{k+1} = \mathbf{x}_k + \mathbf{p}_k$.
+  where, as $k \rightarrow \infty, \mathbf{p}_k \longrightarrow -\left[\nabla^2 f(\mathbf{x}_k)\right]^{-1} \nabla f(\mathbf{x}_k)$
+  If plus some more conditions, then as $k \rightarrow \infty$,
+  $\mathbf{x}_k \rightarrow\mathbf{x}^*$ and it will do so superlinearly.
+
+
+
+
+
+
+
+  \textbf{Newton's Method minimizes the quadratic function in one step:}
+
+
+\end{topic}
+
+
+\subsection{Levenberg-Marquardt Algorithm}
+\begin{topic}
+  The Levenberg-Marquardt algorithm is an adaptive way to blend between Newton
+  steps and steepest descent steps, and is widely used when solving nonlinear
+  least squares problems.
+
+  In the Newton's method, we need the Newton's step $\mathbf{p}_n = -\left[\nabla^2 f(\mathbf{x}_n)\right]^{-1} \nabla f(\mathbf{x}_n)$
+  to points to the descent direction, i.e. to satisfy $\nabla f(\mathbf{x}_n) \cdot \mathbf{p}_n < 0$, which amount to
+  the Hessian matrix in the Newton's step being positive definite. This is becasue
+  $$
+    \nabla^\top f(\mathbf{x}_n) \mathbf{p}_n
+    = -\nabla^{\top} f(\mathbf{x}_n)\left[\nabla^2 f(\mathbf{x}_n)\right]^{-1} \nabla f(\mathbf{x}_n) < 0
+    \quad \Longleftrightarrow \quad
+    \left[\nabla^2 f(\mathbf{x}_n)\right]^{-1} \text{ is positive definite.}
+  $$
+  However, this is not always the case, and we will try to modify our scheme to
+  accomodate.
+
+  Different from the Modified Newton's Method, in this case, the Levenberg-Marquardt algorithm simply revert to
+  the steepest descent (i.e. gradient descent) algorithm $\mathbf{p}_n = - \nabla f(\mathbf{x}_n)$.
+
+
+\end{topic}
+
+
+\subsection{Problems with the Newton's Method}
+\begin{topic}
+  \begin{enumerate}
+    \item If we assume each $\partial f / \partial x_i$ and $\partial^2 f /
+            \partial x_i \partial x_j$ can be evaluated in $O(1)$ operations, then to
+          process the $n^{\text {th }}$ Newton step, i.e. to compute $p_n=-\left[\nabla
+              f\left(x_n\right)\right]^{-1} \nabla f\left(x_n\right)$, we need to solve
+          $$
+            \nabla^2 f\left(x_n\right) p_n=-\nabla f\left(x_n\right)
+          $$
+          which costs $O\left(n^3\right)$ provided $\nabla^2 f\left(x_n\right)$ is
+          symmetric AND if it's positive definite.
+    \item We know that if $\mathbf{x}_0$ is sufficiently close to
+          $\mathbf{x}^*$, then Newton's method converges quadratically! However, the
+          iteration is not guaranteed to converge. A consequence is that for $O(\varepsilon)$ accurary, we need $N=O\left(\log \log \frac{1}{\varepsilon}\right)$ iterations.
+  \end{enumerate}
+\end{topic}
+
+\subsection{Non-Linear Least Square (NLS) Problem}
+\begin{topic}
+  \textbf{Gauss-Newton:}
+  The Gauss-Newton Method is a Newton's Method with approximation of the corresponding Hessian Matrix. (Accuracy <----> complexity)
+  $$
+    \begin{aligned}
+       & \operatorname{minimize}_{\mathbf{c} \in \mathbb{R}^N} \|\mathbf{y}-\mathbf{f}(\mathbf{c})\|^2 \quad \mathbf{f}: \mathbb{R}^N \rightarrow \mathbb{R}^M                                                                                           \\
+       & \mathbf{c}_{n+1} \approx \mathbf{c}_n-\left(\mathcal{D} \mathbf{f}(\mathbf{c}_n)^{\top} \mathcal{D} \mathbf{f}(\mathbf{c}_n)\right)^{-1} \mathcal{D} \mathbf{f}(\mathbf{c}_n)^{\top}\left(\mathbf{f}\left(\mathbf{c}_n\right)-\mathbf{y}\right)
+    \end{aligned}
+  $$
+\end{topic}
+
+
+\newpage
+\section{Topic: Quasi-Newton's Method}
+
+\begin{topic}
+  \textbf{The Secant Method:}
+
+  In one-dimensional root-finding problem, if the objective function $f(x) = 0$ is $C^1$, the Newton's method gives:
+  $
+    x_{k+1} = x_k -\frac{f(x_k)}{f'(x_k)}
+  $
+  We approximate the derivative with $f'(x_k) \approx \frac{f(x_k) -
+      f(x_{k-1})}{x_k - x_{k-1}}$ and obtain the secant iteration:
+  $$
+    x_{k+1} = x_k - \frac{x_k - x_{k-1}}{f(x_k) - f(x_{k-1})}f(x_k)
+  $$
+  In one-dimensional optimization problem, if the objective function $f'(x) = 0$ is $C^1$, the Newton's method gives:
+  $
+    x_{k+1} = x_k -\frac{f'(x_k)}{f''(x_k)}
+  $
+  We approximate the derivative with $f''(x_k) \approx \frac{f'(x_k) -
+      f'(x_{k-1})}{x_k - x_{k-1}}$ and obtain the secant iteration:
+  $$
+    x_{k+1} = x_k - \frac{x_k - x_{k-1}}{f'(x_k) - f'(x_{k-1})}f'(x_k)
+  $$
+  We have that, under appropriate assumptions, the secant method
+  converges superlinearly with order $q=\frac{1+\sqrt{5}}{2}$.
+  \begin{remark}
+    Newton converges quadratically $\rightarrow$ fewer iterations.
+    Secant converges superlineally $\rightarrow$ more iterations.
+    However each Newton iteration cost more
+    than that of secant iteration.
+    $\Rightarrow$ In total, secant method converges faster in TIME.
+  \end{remark}
+
+  \textbf{Why do we need Quasi-Newton:}
+
+  Consider $f: \mathbb{R}^n \rightarrow \mathbb{R}$. In a Newton iteration, we set $\mathbf{p}_k$ to be the solution of
+  $$
+    \nabla^2 f\left(\mathbf{x}_k\right) \mathbf{p}_k =-\nabla f\left(\mathbf{x}_k\right)
+  $$
+
+  However, forming the Hessian matrix $\nabla^2 f\left(x_k\right)$ cost $O\left(n^2\right)$ and
+  solving $\mathbf{p}_k$ cost $O\left(n^3\right)$. The Quasi-Newton wants to improve this by
+  replacing $\nabla^2 f\left(\mathbf{x}_k\right)$ with an approximation $\mathbf{B}_k$.
+
+  \textbf{From Newton to Quasi-Newton:}
+
+  Similar to the approximation $f'(x_k) \approx \frac{f(x_k) -
+      f(x_{k-1})}{x_k - x_{k-1}}$ used in the secant method, the Quasi-Newton method
+  uses an approximation $\mathbf{B}_k$ of the Hessian matrix $\mathbf{H} = \nabla^2 f\left(\mathbf{x}_k\right)$
+  where $\mathbf{B}_k$ is built-up incrementally as a running sum:
+  $$
+    \mathbf{B}_{k+1}=\mathbf{B}_k+\mathbf{C}_k
+  $$
+  Setting $\mathbf{s}_k=\mathbf{x}_{k+1}-\mathbf{x}_k$
+  and $\mathbf{y}_k=\nabla f\left(\mathbf{x}_{k-1}\right)-\nabla f\left(\mathbf{x}_k\right)$, we get the secant
+  condition for the Quasi-Newton method:
+  $$
+    \mathbf{B}_{k+1} \mathbf{s}_k=\mathbf{y}_k
+  $$
+  Having only the secant condition is not enough, since $\mathbf{B}_k$ has $n^2$ parameters but secant condition only provides
+  $n$ equations. Hence, in addition to this, we also want $\mathbf{B}_k$ to satisfy some nice properties.
+
+  There are three competing concerns to guide what props we want:
+  \begin{enumerate}
+    \item We want our iteration to be cheap. $\longrightarrow$  One way to make our iteration cheap is to force $\mathbf{C}_k$ to be low-ranked.
+    \item $\mathbf{B}_k$ to be symmetric.
+    \item $\mathbf{B}_k$ to be positive (semi) definite.
+  \end{enumerate}
+
+
+\end{topic}
+
+\subsection{The Broyden's Method:}
+
+\begin{topic}
+  Broyden suggests using the current estimate of the Jacobian matrix
+  $\mathbf{B}_{k-1}$ and improving upon it by taking the solution to the secant
+  equation that is a minimal modification to $\mathbf{B}_{k}$ :
+  $$
+    \mathbf{B}_{k+1}=\mathbf{B}_{k}+\frac{\mathbf{y}_k-\mathbf{B}_{k} \mathbf{s}_k}{\left\|\mathbf{s}_k\right\|^2} \mathbf{s}_k^{\mathrm{T}}
+    \quad \text{ where } \quad
+    \mathbf{B}_{k+1} = \arg\min_{\mathbf{B}_{k+1}} \left\|\mathbf{B}_{k+1}-\mathbf{B}_{k}\right\|_{\mathrm{F}}
+    \quad \text{ subject to }\quad  \mathbf{B}_{k+1} = \mathbf{B}_{k+1}^\top,\quad
+    \mathbf{B}_{k+1}\mathbf{s}_k =\mathbf{y}_k
+  $$
+  By the Sherman-Morrison formula,
+  We eventually have $\mathbf{B}_k \mathbf{p}_k = -\nabla f\left(\mathbf{x}_k\right)$, $\mathbf{B}_{k}^{-1} = \mathbf{H}_k$:
+  $$
+    \mathbf{H}_{k+1}=\mathbf{H}_k+\frac{\mathbf{s}_k-\mathbf{H}_k \mathbf{y}_k}{\mathbf{s}_k^{\top} \mathbf{H}_k \mathbf{y}_k} \mathbf{s}_k^{\top} \mathbf{H}_k
+  $$
+\end{topic}
+
+\subsection{The Symmetric Rank-1 Update (SR1):}
+\begin{topic}
+  Let $\mathbf{B}_{k+1}$, $\mathbf{B}_k$, and $\mathbf{C}_k$ be symmetric where
+  $\mathbf{C}_k=\gamma \mathbf{w} \mathbf{w}^{\top}$ is rank $1$ and $\left(\mathbf{y}_k-\mathbf{B}_k \mathbf{s}_k\right)^{\top} \mathbf{s}_k \neq 0$.
+  Then, the symmetric rank-1 update is given as:
+  $$
+    \mathbf{B}_{k+1} = \mathbf{B}_{k} + \mathbf{C}_k, \quad \mathbf{C}_k=\frac{\left(\mathbf{y}_k-\mathbf{B}_k \mathbf{s}_k\right)\left(\mathbf{y}_k-\mathbf{B}_k \mathbf{s}_k\right)^{\top}}{\left(\mathbf{y}_k-\mathbf{B}_k \mathbf{s}_k\right)^{\top} \mathbf{s}_k}
+  $$
+  By the Sherman-Morrison formula,
+  We eventually have $\mathbf{B}_k \mathbf{p}_k = -\nabla f\left(\mathbf{x}_k\right)$, $\mathbf{B}_{k}^{-1} = \mathbf{H}_k$:
+  $$
+    \mathbf{H}_{k+1} = \mathbf{H}_k + \frac{\left(\mathbf{s}_k - \mathbf{H}_k \mathbf{y}_k\right)\left(\mathbf{s}_k - \mathbf{H}_k \mathbf{y}_k\right)^{\top}}{\left(\mathbf{s}_k - \mathbf{H}_k \mathbf{y}_k\right)^{\top} \mathbf{y}_k}, \quad
+    \mathbf{p}_k = -\mathbf{H}_k \nabla f\left(\mathbf{x}_k\right)
+  $$
+\end{topic}
+
+\subsection{The DFP Update (SR2):}
+\begin{topic}
+  We use the current estimate of the Jacobian matrix
+  $\mathbf{B}_{k}$ and improving upon it by taking the solution to the secant
+  equation that is a minimal modification to $\mathbf{B}_{k}$. That is,
+  $$
+    \mathbf{B}_{k+1} = \arg\min_{\mathbf{B}_{k+1}} \left\|\mathbf{B}_{k+1}-\mathbf{B}_{k}\right\|_{\mathrm{F}}
+    \quad \text{ subject to }\quad  \mathbf{B}_{k+1} = \mathbf{B}_{k+1}^\top,\quad
+    \mathbf{B}_{k+1}\mathbf{s}_k =\mathbf{y}_k
+  $$
+  The DFP update scheme is then given by:
+  $$
+    \mathbf{B}_{k+1}=\left(\mathbf{I}-\rho_k \mathbf{y}_k \mathbf{s}_k^\top\right) \mathbf{B}_k\left(\mathbf{I}-\rho_k \mathbf{s}_k \mathbf{y}_k^\top\right)+\rho_k \mathbf{y}_k \mathbf{y}_k^\top
+    \quad \text{ where } \quad
+    \rho_k=\frac{1}{\mathbf{y}_k^T \mathbf{s}_k}
+  $$
+  We eventually have $\mathbf{B}_k \mathbf{p}_k = -\nabla f\left(\mathbf{x}_k\right)$, $\mathbf{B}_{k}^{-1} = \mathbf{H}_k$:
+  $$
+    \mathbf{H}_{k+1}=\mathbf{H}_k-\frac{\mathbf{H}_k \mathbf{y}_k \mathbf{y}_k^\top \mathbf{H}_k}{\mathbf{y}_k^	\top \mathbf{H}_k \mathbf{y}_k}+\frac{\mathbf{s}_k \mathbf{s}_k^\top}{\mathbf{y}_k^\top \mathbf{s}_k}
+  $$
+  It is also known that the DFP method is less effective in correcting bad
+  Hessian approximations; this property is believed to be the reason for its
+  poorer practical performance.
+
+  It is interesting to note that the DFP and BFGS updating formulae are duals of
+  each other, in the sense that one can be obtained from the other by the
+  interchanges $\mathbf{s} \longleftrightarrow \mathbf{y}$, $\mathbf{B} \longleftrightarrow \mathbf{H}$. This symmetry is not surprising, given the manner
+  in which we derived these methods above.
+
+\end{topic}
+
+
+
+
+\subsection{The BFGS Update (SR2):}
+\begin{topic}
+  There is no rank-one update formula that maintains both symmetry and positive
+  definiteness of the Hessian approximations. However, there are infinitely many
+  rank-two formulas that do this. The most popular and the most effective, is the BFGS update formula.
+
+  In order to maintain the
+  symmetry and positive definiteness of $\mathbf{B}_{k+1}$, the update form can
+  be chosen as $\mathbf{B}_{k+1}=\mathbf{B}_k+\alpha \mathbf{u}
+    \mathbf{u}^{\top}+\beta \mathbf{v} \mathbf{v}^{\top}$ where $\mathbf{B}_k$ is a
+  symmetric positive-definite matrix. Imposing the secant
+  condition, $\mathbf{B}_{k+1} \mathbf{s}_k=\mathbf{y}_k$. Choosing
+  $\mathbf{u}=\mathbf{y}_k$ and $\mathbf{v}=\mathbf{B}_k \mathbf{s}_k$, we can
+  obtain $\alpha =\frac{1}{\mathbf{y}_k^\top \mathbf{s}_k}$ and $\beta =-\frac{1}{\mathbf{s}_k^\top \mathbf{B}_k \mathbf{s}_k}$.
+  Then, we have the following updating formula:
+  $$
+    \mathbf{B}_{k+1}=\mathbf{B}_k-\frac{\left(\mathbf{B}_k s_k\right)\left(\mathbf{B}_k \mathbf{s}_k\right)^T}{\mathbf{s}_k^T \mathbf{B}_k \mathbf{s}_k}+\frac{\mathbf{y}_k \mathbf{y}_k^T}{\mathbf{y}_k^T \mathbf{s}_k}
+  $$
+  and $\mathbf{B}_{k+1}$ is positive definite if
+  and only if $\mathbf{y}_k^T \mathbf{s}_k>0$ (curvature condition).
+
+  A naive implementation of this variant is not efficient for unconstrained
+  minimization, because it requires the system $\mathbf{B}_k
+    \mathbf{p}_k=-\nabla f_k$ to be solved for the step $\mathbf{p}_k$, thereby
+  increasing the cost of the step computation to $O\left(n^3\right)$. We discuss
+  later, however, that less expensive implementations of this variant are
+  possible by updating Cholesky factors of $\mathbf{B}_k$.
+
+  Setting $\rho_k=\frac{1}{\mathbf{y}_k^T \mathbf{s}_k}$, and by the Sherman-Morrison formula,
+  we eventually have $\mathbf{B}_k \mathbf{p}_k = -\nabla f\left(\mathbf{x}_k\right)$, $\mathbf{B}_{k}^{-1} = \mathbf{H}_k$:
+  $$
+    \mathbf{H}_{k+1}=\left(\mathbf{I}-\rho_k \mathbf{s}_k \mathbf{y}_k^T\right) \mathbf{H}_k\left(\mathbf{I}-\rho_k \mathbf{y}_k \mathbf{s}_k^T\right)+\rho_k \mathbf{s}_k \mathbf{s}_k^T
+  $$
+  Each iteration can be performed at a cost of $O(n^2)$ arithmetic operations (plus
+  the cost of function and gradient evaluations); there are no $O(n^3)$ operations
+  such as linear system solves or matrix-matrix operations. The algorithm is
+  robust, and its rate of convergence is superlinear, which is fast enough for
+  most practical purposes.
+
+  \begin{remark}
+    Even though Newton's method converges more rapidly
+    (that is, quadratically), its cost per iteration usually is higher, because of
+    its need for second derivatives and solution of a linear system.
+  \end{remark}
+\end{topic}
+
+\subsection{The Broyden Family}
+\begin{topic}
+  So far, we have described the BFGS, DFP, and SR1 quasi-Newton updating formulae,
+  but there are many others. Of particular interest is the Broyden class, a family
+  of updates specified by the following general formula:
+  $$
+    \mathbf{B}_{k+1} = \mathbf{B}_k - \frac{\mathbf{B}_k \mathbf{s}_k \mathbf{s}_k^T \mathbf{B}_k}{\mathbf{s}_k^T \mathbf{B}_k \mathbf{s}_k} + \frac{\mathbf{y}_k \mathbf{y}_k^T}{\mathbf{y}_k^T \mathbf{s}_k} + \phi_k\left(\mathbf{s}_k^T \mathbf{B}_k \mathbf{s}_k\right) \mathbf{v}_k \mathbf{v}_k^T
+    \quad \text{ where }\quad
+    \mathbf{v}_k = \left[\frac{\mathbf{y}_k}{\mathbf{y}_k^T \mathbf{s}_k} - \frac{\mathbf{B}_k \mathbf{s}_k}{\mathbf{s}_k^T \mathbf{B}_k \mathbf{s}_k}\right]
+  $$
+  and $\phi_k$ is a scalar parameter.
+
+  We can rewrite as a ``linear combination'' of these two methods:
+  $$
+    \mathbf{B}_{k+1} = \left(1-\phi_k\right) \mathbf{B}_{k+1}^{\mathrm{BFGS}} + \phi_k \mathbf{B}_{k+1}^{\mathrm{DFP}}
+  $$
+  Specifically, the BFGS and DFP methods are members of the Broyden class—we recover BFGS by
+  setting $\phi_k=0$ and DFP by setting $\phi_k=1$.
+
+  \begin{enumerate}
+    \item All members of the Broyden class satisfy the
+          secant condition, since the BFGS and DFP matrices themselves satisfy this
+          equation.
+    \item The parameter $\phi$ is, in general, allowed to vary from one iteration to another.
+    \item A Broyden family is defined by a sequence $\phi_1, \phi_2, \cdots$, of parameter values.
+    \item For $0 \leqslant \phi \leqslant 1$, the Hessian approximations when $\mathbf{s}_k^T \mathbf{y}_k > 0$ are positive definite since
+          BFGS and DFP updating preserve positive definiteness of the Hessian approximations when $\mathbf{s}_k^T \mathbf{y}_k > 0$.
+    \item For $\phi<0$ and $\phi>1$ there is the possibility that the Hessian approximations may become singular.
+    \item In practice, $0 \leqslant \phi \leqslant 1$ is usually imposed to avoid difficulties.
+  \end{enumerate}
+
+
+\end{topic}
+
+\subsection{Comparing SR1, Broyden, DFP and BFGS:}
+\begin{topic}
+  \begin{enumerate}
+    \item The SR1 update does NOT maintain the positive definteness of the Hessian approximation $\mathbf{B}_k$ (also $\mathbf{H}_k$).
+    \item The SR1 update generated $\mathbf{B}_k$ is a better approximations to the
+          true Hessian matrix than the BFGS approximations.
+    \item The condition $\left(\mathbf{y}_k-\mathbf{B}_k \mathbf{s}_k\right)^{\top} \mathbf{s}_k \neq 0$ might not hold which is required in
+          the SR1 update. In fact, even when the objective function is a convex quadratic,
+          there may be steps on which there is no symmetric rank-1 update that satisfies
+          the secant equation.
+    \item In Quasi-Newton methods for constrained problems, it may not be possible to impose
+          the curvature condition $\mathbf{y}_k^T \mathbf{s}_k> >0$ required in the BFGS framework.
+    \item The BFGS update maintains the positive definteness of the Hessian approximation $\mathbf{B}_k$ (also $\mathbf{H}_k$)
+  \end{enumerate}
+
+  \begin{remark}
+    Since storing the Hessian takes $O\left(D^{2}\right)$ space, for very large
+    problems, one can use limited memory BFGS, or L-BFGS, where
+    $\boldsymbol{H}_{k}$ or $\boldsymbol{H}_{k}^{-1}$ is approximated by a
+    diagonal plus low rank matrix and the product $\boldsymbol{H}_{k}^{-1}
+      \boldsymbol{g}_{k}$ can be obtained by performing a sequence of inner
+    products.
+    $$
+      \ell_{i} \leq x_{i} \leq u_{i}
+    $$
+
+    where $\ell_{i}<u_{i}$ are real-valued bounds.
+
+    \begin{itemize}
+      \item These are sometimes referred to as box constraints, and arise often in statistical parameter estimation problems.
+
+      \item For example, one might want to enforce positivity for a variance parameter.
+    \end{itemize}
+  \end{remark}
+
+\end{topic}
+
+\newpage
+\section{Topic: Descent}
+\begin{topic}
+
+  \textbf{Descent direction:}
+
+  We call $\mathbf{p}_n$ a descent direction if
+  $$\mathcal{D} f\left(\mathbf{x}_n\right) \mathbf{p}_n<0$$
+  If $\mathbf{p}_n$ is a descent direction then you shall be able to choose $\alpha_n>0$ s.t. $f\left(\mathbf{x}_n+\alpha_n \mathbf{p}_n\right)<f\left(\mathbf{x}_n\right)$
+  (FYI: this is for $\mathbf{x}_{n+1}=\mathbf{x}_n+\alpha_n \mathbf{p}_n$ such as:
+  $$
+    \begin{aligned}
+      Gradient Descent: & -\nabla f\left(\mathbf{x}_n\right)                                                                \\
+      \text { Newton: } & -\nabla^2 f\left(\mathbf{x}_n\right) \nabla f\left(\mathbf{x}_n\right)                            \\
+      Gauss-Newton:     & -\mathcal{D} f\left(\mathbf{c}_n\right)^\dagger\left(\mathbf{y}-f\left(\mathbf{c}_n\right)\right)
+    \end{aligned}
+  $$
+  \vspace*{0.5em}
+
+  \hrule
+
+  \textbf{Line Search:}
+  \begin{enumerate}
+    \item \textbf{Exact Line Search:} Idea: Find $\alpha_n$ that will minimize $f$ at every step (not necessarily the ultimate minimum). This is because the gradient only points "down" but not directly towards the minimum.
+          $$
+            \alpha_n= \arg\min_{\alpha > 0} f\left(\mathbf{x}_n+\alpha \mathbf{p}_n\right)
+          $$
+          However, exact line search can be very COSTLY computationally. Further
+          more, the steepest descent path with exact line-search exhibits a
+          characteristic zig-zag behavior. This is because the necessay condition for $\alpha_n$ is
+          \[
+          \phi(\alpha_n)=f(\mathbf{x}_n+\alpha_n \mathbf{p}_n) 
+          \Longrightarrow 
+          \phi^{\prime}(\alpha_n)=(\nabla f)(\mathbf{x}_n+\alpha_n \mathbf{p}_n) \cdot \mathbf{p}_n=0
+          \]
+          which means that $\nabla f$ at the end of the step is orthogonal to
+          $\mathbf{p}_k$, the descent direction, whenever $\mathbf{p}_k \neq 0$.
+          
+    \item \textbf{Heuristic Line Search:} $\alpha_n^{(0)}:=1$; check if $f\left(\mathbf{x}_n+\alpha_n^{(0)} \mathbf{p}_n\right)<f\left(\mathbf{x}_n\right)$, if not, set $\alpha_n^{(1)}=\frac{1}{2} \alpha_n^{(0)}$ and so on.
+
+          e.g. First try $\alpha_n=1$ ---> Failure? ---> try $\alpha_n=\frac{1}{2} \alpha_n$
+          $=\frac{1}{2}$ and so on.
+    \item \textbf{Backtracking Line Search:} This is just the Heuristic Line Search $+$ the Armijo condition.
+          
+    Setting $\mu \in(0,1 / 2), \beta \in(0,1)$, and given a descent direction $\mathbf{p}_n$, then starting at
+          $\alpha_n^{(0)}=1$, repeat $\alpha_n^{(k)}:=\beta \alpha_n^{(k-1)}$ until
+          \[
+            f(\mathbf{x}_n+\alpha_n^{(k)} \mathbf{p}_n)<f(\mathbf{x}_n)+\mu \alpha_n^{(k)} \nabla^\top f\left(\mathbf{x}_n\right)\mathbf{p}_n
+          \quad \text{ Armijo condition }
+            \]
+          Since $\mathbf{p}_n$ is assumed to be a descent direction, we have $\nabla^\top f\left(\mathbf{x}_n\right)
+            \mathbf{p}_n<0$, so for small enough $\alpha_n^{(k)}$ we have
+          \[
+            f(\mathbf{x}_n+\alpha_n^{(k)} \mathbf{p}_n) 
+            \approx 
+            f(\mathbf{x}_n)+\alpha_n^{(k)} \nabla^\top f\left(\mathbf{x}_n\right)\mathbf{p}_n
+            <
+            f(\mathbf{x}_n)+\mu \alpha_n^{(k)}\nabla^\top f\left(\mathbf{x}_n\right)\mathbf{p}_n
+          \]
+          This shows that the backtracking line search eventually terminates.
+
+          The constant $\mu$ can be interpreted as the fraction of the decrease in $f$
+          predicted by linear extrapolation that we will accept.
+  \end{enumerate}
+  \vspace*{0.5em}
+
+  \hrule
+
+  \textbf{General conditions for descent algorithm $\mathbf{x}_{k+1}=\mathbf{x}_k+\mathbf{p}_k \alpha_k$ to converge:}
+
+  Suppose $\alpha_k \in[0,1]$ is chosen using backtracking line search and $\mathbf{p}_k$ is the ``search direction'', we need
+
+  \begin{enumerate}
+    \item \textbf{Armijo condition on $\alpha_k$ (Assures descent):} For
+          \[
+            f\left(\mathbf{x}_k+\alpha_k \mathbf{p}_k\right) \leqslant f\left(\mathbf{x}_k\right)+\mu \alpha_k \nabla f\left(\mathbf{x}_k\right)^{\top} \mathbf{p}_k
+            \text{ where } \mu_k\in(0,1) \text{ w.r.t. every }  k
+          \]
+
+    \item \textbf{Angle condition (Avoids running in circles -- very slow):}
+          \[
+            -\frac{\mathbf{p}_k^{\top} \nabla f\left(\mathbf{x}_k\right)}{\left\|\mathbf{p}_k\right\|_2\left\|\nabla f\left(\mathbf{x}_k\right)\right\|_2} = \cos{\theta}\geqslant \varepsilon \longrightarrow \text { constant w.r.t. } k
+          \]
+
+    \item \textbf{Gradient condition (Assures sufficient descent step's magnitude):}
+          \[
+            \exists m>0 \text {, s.t. }\left\|\mathbf{p}_k\right\| \geqslant m\left\|\nabla f\left(\mathbf{x}_k\right)\right\|_2 \text {. }
+          \]
+          This condition specifies that the magnitude of $\mathbf{p}_k$ should NOT be too much smaller than that of the gradient $\nabla f\left(\mathbf{x}_k\right)$.
+  \end{enumerate}
+
+  \textbf{Theorem (Griva $11.7$ )}
+
+  Let $S: \mathbb{R}^n \rightarrow \mathbb{R}$ set. $\nabla f$ is Lipchitz with constant $L$ (i.e. $\left\|\nabla f\left(\mathbf{x}_1\right)-\nabla f\left(\mathbf{x}_2\right)\right\|_2 \le L\left\|\mathbf{x}_1-\mathbf{x}_2\right\|_2$).
+  Let $\mathbf{x}_0 \in \mathbb{R}^n$, and consider the iteration $\mathbf{x}_{k+1}=\mathbf{x}_k+\alpha_k \mathbf{p}_k$ where $\alpha_k$ is chosen using the Backtracking line search with $\alpha_k=1, \frac{1}{2}, \frac{1}{4}, \ldots$ satisfying the following properties:
+  \begin{enumerate}
+    \item The set $S=\left\{\mathbf{x} \in \mathbb{R}^n: f(\mathbf{x}) \leqslant f\left(\mathbf{x}_n\right)\right\}$ is bounded.
+    \item The $\mathbf{p}_k$'s satisfy the angle condition with parameter $\varepsilon>0$.
+    \item The $\mathbf{p}_k$'s are gradient-related with constant $m>0$.
+    \item $\left\|\mathbf{p}_k\right\|_2 \leq M<\infty \quad \forall k \geq 0$.
+    \item $\alpha_k \in(0,1]$ is the first $\alpha_k \in\left\{1, \frac{1}{2}, \frac{1}{4}, \cdots\right\}$ such that the Armijo condition holds.
+  \end{enumerate}
+  Then, we have $\lim _{k \rightarrow \infty}\left\|\nabla f\left(\mathbf{x}_k\right)\right\|_z=0$.
+
+\end{topic}
+
+
+
+\subsection{Gradient Descent}
+\begin{topic}
+  $$
+    \mathbf{x}_{n+1}=\mathbf{x}_n-\alpha \nabla f\left(\mathbf{x}_n\right)
+  $$
+
+  Note: The negative gradient is always a descent direction unless we are already at a point where the gradient vanishes.
+  This is because if $\nabla f\left(\mathbf{x}_n\right) \neq 0$, then
+  $$
+    \mathcal{D} f\left(\mathbf{x}_n\right) \cdot \left(-\nabla f\left(\mathbf{x}_n\right)\right)
+    = -\nabla^\top f\left(\mathbf{x}_n\right)\nabla f\left(\mathbf{x}_n\right)
+    = - \|\nabla f\left(\mathbf{x}_n\right) \|^2 < 0
+  $$ satisfies the condition for $\nabla f\left(\mathbf{x}_n\right)$ being a descent direction.
+  If $\nabla f\left(\mathbf{x}_n\right) = 0$, this implies that we have arrived at a critical point.
+  In other words, 
+
+  Why do we need learning rate?
+  Ans: Because the iteration might bounce back and forth, think $f(x) = x^2$.
+
+\end{topic}
+
+
+
+
+
+
+\section{Comparing the Newton's Method and Gradient Descent}
+\begin{topic}
+  Newton's Method is useful, but it's costly: $O(N^3)$. Newton's Method might
+  not converge if it's not sufficiently close to the optimal.
+
+
+  newton's method与gradient descent的好处和坏处是什么? - Answer: 1. Gradient
+  descent is parametric, need to choose the step size, while newton's method has
+  no hyperparameters. 2. GD needs more iteration, while for each iteration, GD has
+  smaller complexity. $O(n)$ vs $O(n^3)$. 3. Newton's method require second order
+  differentiability. 4. Different behaviour around stationary points.
+\end{topic}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
