@@ -315,7 +315,6 @@ WordSpace=1.7,
     \item $q=2$ \textit{quadratically convergent}
     \item $q=3$ \textit{cubically convergent}
     \item $q=1, \mu=0$ \textit{super linear convergent}, quicker than vanilla linear convergent.
-    \item For $q=1$,
   \end{itemize}
 \end{definition}
 
@@ -326,6 +325,53 @@ WordSpace=1.7,
   $$
 \end{definition}
 
+\begin{definition}
+  \textbf{Notation:} Suppose $\mathbf{F} : \mathbb{R}^n \rightarrow \mathbb{R}^m$, then we have
+  $$
+    \text{Jacobian}(\mathbf{F}) = \mathcal{D}(\mathbf{F})
+    = \left(\frac{\partial \mathbf{F}}{\partial x_1}, \ldots, \frac{\partial \mathbf{F}}{\partial x_n}\right)
+    = \begin{pmatrix}
+      \frac{\partial F_1}{\partial x_1} & \cdots & \frac{\partial F_1}{\partial x_n} \\
+      \vdots                            & \ddots & \vdots                            \\
+      \frac{\partial F_m}{\partial x_1} & \cdots & \frac{\partial F_m}{\partial x_n}
+    \end{pmatrix}
+    =\left[\begin{array}{c}
+      \nabla^{\top} F_1 \\
+      \vdots \\
+      \nabla^{\top} F_m
+      \end{array}\right]
+  $$
+
+  Suppose $f: \mathbb{R}^n \rightarrow \mathbb{R}$, then we have
+  $$
+    \text{Hessian}(f) = \nabla\nabla^\top(f) = \nabla f\nabla^\top f \xlongequal{\text{ notation }} \nabla^2 f     
+                      = \begin{pmatrix}
+                            \frac{\partial f}{\partial x_1} \\
+                            \vdots                          \\
+                            \frac{\partial f}{\partial x_n}
+                          \end{pmatrix}
+    \begin{pmatrix}
+      \frac{\partial f}{\partial x_1}, \ldots, \frac{\partial f}{\partial x_n}
+    \end{pmatrix}                                     
+                      = \begin{pmatrix}
+                            \frac{\partial^2 f}{\partial x_1 x_1} & \cdots & \frac{\partial^2 f}{\partial x_1x_n} \\
+                            \vdots                                & \ddots & \vdots                               \\
+                            \frac{\partial^2 f}{\partial x_nx_1}  & \cdots & \frac{\partial^2 f}{\partial x_nx_n}
+                          \end{pmatrix} 
+      = \left(\frac{\partial \nabla f}{\partial x_1}, \ldots, \frac{\partial \nabla f}{\partial x_n}\right)
+      = \mathcal{D}\left(\nabla f\right)
+  $$
+  Also
+  $$
+  \text{gradient}(f) = \nabla f = \begin{pmatrix}
+    \frac{\partial f}{\partial x_1} \\
+    \vdots                          \\
+    \frac{\partial f}{\partial x_n}
+  \end{pmatrix} =  \begin{pmatrix}
+    \frac{\partial f}{\partial x_1}, \ldots, \frac{\partial f}{\partial x_n}
+  \end{pmatrix}^\top  = \left[\mathcal{D}f\right]^\top = \text{Jacobian}(f)^\top
+  $$
+\end{definition}
 \newpage
 \section{Topic: Newton's Method}
 \subsection{One Dimensional Newton's Method}
@@ -334,24 +380,24 @@ WordSpace=1.7,
   The Newton's method only applies when $f(x)$ is a differentiable function. We start with an initial guess $x_0$, the closer to $x^*$ the better.
   Then, we calculate the derivative $f^{\prime}(x_0)$ at the guess point and have the following iteration scheme:
 
-  \textbf{Iteration Scheme}: Suppose we have $x_n$ and $x^* = x_n + \delta_n$. Then, we have
+  \textbf{Iteration Scheme}: Suppose we have $x_k$ and $x^* = x_k + \delta_k$. Then, we have
   $$
-    0 = f(x^*) = f(x_n+\delta_n) = f(x_n) + f'(x_n)\delta_n + O(\|\delta_n\|^2)\quad \Longrightarrow \quad \delta_n = -\frac{f(x_n)}{f'(x_n)} + O(\|\delta_n\|^2)
+    0 = f(x^*) = f(x_k+\delta_k) = f(x_k) + f'(x_k)\delta_k + O(\|\delta_k\|^2)\quad \Longrightarrow \quad \delta_k = -\frac{f(x_k)}{f'(x_k)} + O(\|\delta_k\|^2)
   $$
-  We approximate $\delta_n$ with $-\frac{f(x_n)}{f'(x_n)}$ and obtain
+  We approximate $\delta_k$ with $-\frac{f(x_k)}{f'(x_k)}$ and obtain
   $$
-    x^* \approx x_{n+1} = x_n -\frac{f(x_n)}{f'(x_n)}
+    x^* \approx x_{n+1} = x_k -\frac{f(x_k)}{f'(x_k)}
   $$
   Repeat the process until the value of $f(x_{n+1})$ gets sufficiently close to zero or until a desired level of accuracy is reached.
 
   \textbf{Quadratic Convergence:}
   $$
-    \delta_{n+1} = x^* - x_{n+1} =  (x_n + \delta_n) - x_n + \frac{f(x_n)}{f'(x_n)} = O(\|\delta_n\|^2) = \frac{1}{2}\left|\frac{f''(\eta_k)}{f'(x_n)}\right|\delta_n^2 \quad \Longrightarrow \quad |\delta_{n+1}| \le \frac{1}{2}\left|\frac{f''(\eta_k)}{f'(x_n)}\right| |\delta_n|^2 \quad \longrightarrow \quad\text{quadratic convergence}
+    \delta_{n+1} = x^* - x_{n+1} =  (x_k + \delta_k) - x_k + \frac{f(x_k)}{f'(x_k)} = O(\|\delta_k\|^2) = \frac{1}{2}\left|\frac{f''(\eta_k)}{f'(x_k)}\right|\delta_k^2 \quad \Longrightarrow \quad |\delta_{n+1}| \le \frac{1}{2}\left|\frac{f''(\eta_k)}{f'(x_k)}\right| |\delta_k|^2 \quad \longrightarrow \quad\text{quadratic convergence}
   $$
   \textbf{Conditions for Convergence:}
   \begin{enumerate}
     \item $f$ is $C^2$ on interval $[x^* - \delta, x^* + \delta], \delta > 0$ and that $f(x^*) = 0$ and $f''(x^*) \ne 0$.
-    \item There exists $A>0$ such that $\left|\frac{f''(\eta_k)}{f'(x_n)}\right|\le A$ for all $x,y\in [x^* - \delta, x^* + \delta]$.
+    \item There exists $A>0$ such that $\left|\frac{f''(\eta_k)}{f'(x_k)}\right|\le A$ for all $x,y\in [x^* - \delta, x^* + \delta]$.
     \item If $|x^* - x_0| \le h$ where $h \le \delta, \frac{1}{A}$, then the sequence $\{x_k\}$ defined by Newton's method converges quadratically to $x^*$.
   \end{enumerate}
 
@@ -361,7 +407,7 @@ WordSpace=1.7,
 
   \textbf{Optimization Problem:} For the optimization problem $f^{\prime}(x)=0$, the Newton's method yields the following iteration scheme:
   $$
-    x_{n + 1}=x_n-\frac{f^{\prime}\left(x_n\right)}{f^{\prime \prime}\left(x_n\right)}
+    x_{n + 1}=x_k-\frac{f^{\prime}\left(x_k\right)}{f^{\prime \prime}\left(x_k\right)}
   $$
 \end{topic}
 
@@ -369,64 +415,64 @@ WordSpace=1.7,
 \begin{topic}
   \textbf{Root-Finding Problem:} Solve $\mathbf{F}(\mathbf{x})=\boldsymbol{0} , \mathbf{F}:\mathbb{R}^n \rightarrow \mathbb{R}^m$.
 
-  Suppose $\mathbf{x}^* \approx \mathbf{x}_{n+1} = \mathbf{x}_n+\delta \mathbf{x}$ We have
+  Suppose $\mathbf{x}^* \approx \mathbf{x}_{n+1} = \mathbf{x}_k+\delta \mathbf{x}$ We have
   $$
-    0=\mathbf{F}\left(\mathbf{x}^*\right)\approx\mathbf{F}\left(\mathbf{x}_n+\delta \mathbf{x}\right)=\mathbf{F}\left(\mathbf{x}_n\right)+\mathcal{D} \mathbf{F}\left(\mathbf{x}_n\right) \delta \mathbf{x}+O(\|\delta \mathbf{x}\|^2)
+    0=\mathbf{F}\left(\mathbf{x}^*\right)\approx\mathbf{F}\left(\mathbf{x}_k+\delta \mathbf{x}\right)=\mathbf{F}\left(\mathbf{x}_k\right)+\mathcal{D} \mathbf{F}\left(\mathbf{x}_k\right) \delta \mathbf{x}+O(\|\delta \mathbf{x}\|^2)
   $$
   solve for $\delta \mathbf{x}$ and we obtain the Newton iteration scheme:
   $$
-    \mathbf{x}_{n+1}=\mathbf{x}_n-\left(\mathcal{\mathcal{D}} \mathbf{F}\left(\mathbf{x}_n\right)^{\top} \mathcal{D} \mathbf{F}\left(\mathbf{x}_n\right)\right)^{-1} \mathcal{D} \mathbf{F}\left(\mathbf{x}_n\right) \mathbf{F}\left(\mathbf{x}_n\right)
-    = \left[\mathcal{D} \mathbf{F}\left(\mathbf{x}_n\right)\right]^\dagger\mathbf{F}\left(\mathbf{x}_n\right)
+    \mathbf{x}_{n+1}=\mathbf{x}_k-\left(\mathcal{\mathcal{D}} \mathbf{F}\left(\mathbf{x}_k\right)^{\top} \mathcal{D} \mathbf{F}\left(\mathbf{x}_k\right)\right)^{-1} \mathcal{D} \mathbf{F}\left(\mathbf{x}_k\right) \mathbf{F}\left(\mathbf{x}_k\right)
+    = \left[\mathcal{D} \mathbf{F}\left(\mathbf{x}_k\right)\right]^\dagger\mathbf{F}\left(\mathbf{x}_k\right)
   $$
-  where $\left[\mathcal{D} \mathbf{F}\left(\mathbf{x}_n\right)\right]^\dagger := \left(\mathcal{\mathcal{D}} \mathbf{F}\left(\mathbf{x}_n\right)^{\top} \mathcal{D} \mathbf{F}\left(\mathbf{x}_n\right)\right)^{-1} \mathcal{D} \mathbf{F}\left(\mathbf{x}_n\right)$.
+  where $\left[\mathcal{D} \mathbf{F}\left(\mathbf{x}_k\right)\right]^\dagger := \left(\mathcal{\mathcal{D}} \mathbf{F}\left(\mathbf{x}_k\right)^{\top} \mathcal{D} \mathbf{F}\left(\mathbf{x}_k\right)\right)^{-1} \mathcal{D} \mathbf{F}\left(\mathbf{x}_k\right)$.
 
 
   \textbf{Optimization Problem:} Find $\mathbf{x}$ such that $\nabla f= 0$,  $f: \mathbb{R}^N \rightarrow \mathbb{R}$.
   Similarly, the Newton iteration scheme gives:
   $$
-    \mathbf{x}_{n+1}=\mathbf{x}_n-\left(\nabla^2 f\left(\mathbf{x}_n\right)\right)^{-1} \nabla f\left(\mathbf{x}_n\right)
+    \mathbf{x}_{n+1}=\mathbf{x}_k-\left(\nabla^2 f\left(\mathbf{x}_k\right)\right)^{-1} \nabla f\left(\mathbf{x}_k\right)
     \quad \text{ where } \quad
-    \nabla^2 f=\left[\frac{\partial \nabla f}{\partial x_1}, \cdots \frac{\partial \nabla f}{\partial x_n}\right], \nabla f=\left[\begin{array}{c}
+    \nabla^2 f=\left[\frac{\partial \nabla f}{\partial x_1}, \cdots \frac{\partial \nabla f}{\partial x_k}\right], \nabla f=\left[\begin{array}{c}
         \frac{\partial f}{\partial x_1} \\
         \vdots                          \\
-        \frac{\partial f}{\partial x_n}
+        \frac{\partial f}{\partial x_k}
       \end{array}\right]
   $$
-  and $\nabla^2 f\left(\mathbf{x}_n\right)$ is the corresponding Hessian matrix.
+  and $\nabla^2 f\left(\mathbf{x}_k\right)$ is the corresponding Hessian matrix.
 
   \textbf{Modified Newton's Method:}
 
-  We need the Newton's step $\mathbf{p}_n = -\left[\nabla^2 f(\mathbf{x}_n)\right]^{-1} \nabla f(\mathbf{x}_n)$
-  to points to the descent direction, i.e. to satisfy $\nabla f(\mathbf{x}_n) \cdot \mathbf{p}_n < 0$, which amount to
+  We need the Newton's step $\mathbf{p}_k = -\left[\nabla^2 f(\mathbf{x}_k)\right]^{-1} \nabla f(\mathbf{x}_k)$
+  to points to the descent direction, i.e. to satisfy $\nabla f(\mathbf{x}_k) \cdot \mathbf{p}_k < 0$, which amount to
   the Hessian matrix in the Newton's step being positive definite. This is becasue
   $$
-    \nabla^\top f(\mathbf{x}_n) \mathbf{p}_n
-    = -\nabla^{\top} f(\mathbf{x}_n)\left[\nabla^2 f(\mathbf{x}_n)\right]^{-1} \nabla f(\mathbf{x}_n) < 0
+    \nabla^\top f(\mathbf{x}_k) \mathbf{p}_k
+    = -\nabla^{\top} f(\mathbf{x}_k)\left[\nabla^2 f(\mathbf{x}_k)\right]^{-1} \nabla f(\mathbf{x}_k) < 0
     \quad \Longleftrightarrow \quad
-    \left[\nabla^2 f(\mathbf{x}_n)\right]^{-1} \text{ is positive definite.}
+    \left[\nabla^2 f(\mathbf{x}_k)\right]^{-1} \text{ is positive definite.}
   $$
   However, this is not always the case, and we will try to modify our scheme to
   accomodate. The idea of modifying Newton's Method is simple and similar to
-  that of the ridge regression: if $\nabla^2 f(\mathbf{x}_n)$ is not positive
+  that of the ridge regression: if $\nabla^2 f(\mathbf{x}_k)$ is not positive
   definite, we then add some diagonal matrix with nonnegative diagonal entries
   to it. Suppose \((\lambda, \mathbf{u})\) is an eigen-pair of a matrix
-  \(\mathbf{A} = \nabla^2 f(\mathbf{x}_n)\), then let \(\alpha \in \mathbb{R}^+\), we obtain
+  \(\mathbf{A} = \nabla^2 f(\mathbf{x}_k)\), then let \(\alpha \in \mathbb{R}^+\), we obtain
   $$
     (\mathbf{A}+\alpha \mathbf{I}) \mathbf{u} =
     \mathbf{A} \mathbf{u} + \alpha \mathbf{u}= \lambda \mathbf{u} + \alpha \mathbf{u} = (\lambda + \alpha) \mathbf{u}
     \quad \Longrightarrow \quad
-    \text{eventually modified eigenvalues } \lambda_{new} = \lambda + \alpha \text{ of } \nabla^2 f(\mathbf{x}_n) \text{ will all be positive }
+    \text{eventually modified eigenvalues } \lambda_{new} = \lambda + \alpha \text{ of } \nabla^2 f(\mathbf{x}_k) \text{ will all be positive }
   $$
 
-  Actually, if \(\nabla^2 f(\mathbf{x}_n)\) is positive definite, then so is
-  \(\left[\nabla^2 f(\mathbf{x}_n)\right]^{-1}\) why? Let \((\lambda,
-  \mathbf{u})\) be an eigen-pair of \(\nabla^2 f(\mathbf{x}_n)\) where $\lambda>0$:
+  Actually, if \(\nabla^2 f(\mathbf{x}_k)\) is positive definite, then so is
+  \(\left[\nabla^2 f(\mathbf{x}_k)\right]^{-1}\) why? Let \((\lambda,
+  \mathbf{u})\) be an eigen-pair of \(\nabla^2 f(\mathbf{x}_k)\) where $\lambda>0$:
   $$
-    \nabla^2 f(\mathbf{x}_n) \mathbf{u} = \lambda \mathbf{u}
+    \nabla^2 f(\mathbf{x}_k) \mathbf{u} = \lambda \mathbf{u}
     \quad \Longrightarrow \quad
-    \lambda^{-1} \mathbf{u} = \left[\nabla^2 f(\mathbf{x}_n)\right]^{-1} \mathbf{u}
+    \lambda^{-1} \mathbf{u} = \left[\nabla^2 f(\mathbf{x}_k)\right]^{-1} \mathbf{u}
     \quad \Longrightarrow \quad
-    \text{ all eigenvalues } \lambda^{-1} \text{ of } \left[\nabla^2 f(\mathbf{x}_n)\right]^{-1} \text{ are positive }
+    \text{ all eigenvalues } \lambda^{-1} \text{ of } \left[\nabla^2 f(\mathbf{x}_k)\right]^{-1} \text{ are positive }
   $$
 
   \textbf{Kantonovich theorem ---- quadratic convergence of Newton's Method:}
@@ -447,12 +493,37 @@ WordSpace=1.7,
   $\mathbf{x}^*$ a local $\min \Rightarrow \mathbf{x}^*$ global min on $S$.
 
 
-  \textbf{Another theorem:}
+  \textbf{Another Theorem:}
 
   If instead of Newton's method, you use the iteration $\mathbf{x}_{k+1} = \mathbf{x}_k + \mathbf{p}_k$.
   where, as $k \rightarrow \infty, \mathbf{p}_k \longrightarrow -\left[\nabla^2 f(\mathbf{x}_k)\right]^{-1} \nabla f(\mathbf{x}_k)$
   If plus some more conditions, then as $k \rightarrow \infty$,
   $\mathbf{x}_k \rightarrow\mathbf{x}^*$ and it will do so superlinearly.
+
+  \textbf{Logic:}
+  \begin{enumerate}
+    \item We know Newton's method sometimes fails.
+    \item Kantonovich theorem $\Longrightarrow$ \textbf{Condition*:} If $f$ is
+          $C^2$, $\nabla^2 f$ is Lipschitr-continuous (not too crazy) and
+          $\mathbf{x}_0$ is close enough to $\mathbf{x}^*$ on $S$.
+    \item then Newton's method works and converges quadratically, Great!
+    \item How do we satisfy \textbf{Condition*} so we can use the best of NM?
+          $\rightarrow$ We modify it to satisfy \textbf{Condition*}.
+    \item Is the Newton's step always in a ``descent direction''? $\rightarrow$
+          No always. Need $\nabla^2 f$ positive definite.
+    \item But $\nabla^2 f$ not always positive definite, what do we do?
+          $\rightarrow$ modify $\nabla^2 f$ s.t. it's positive definite and $\nabla^2
+            f$ satisfies \textbf{Another Theorem}.
+    \item Use the \textbf{Another Theorem} above and the iteration converges superlinearly
+          until we get to \textbf{Condition*}, then we converge quadratically.
+  \end{enumerate}
+
+
+
+
+
+
+
 
 
 
@@ -472,20 +543,20 @@ WordSpace=1.7,
   steps and steepest descent steps, and is widely used when solving nonlinear
   least squares problems.
 
-  In the Newton's method, we need the Newton's step $\mathbf{p}_n = -\left[\nabla^2 f(\mathbf{x}_n)\right]^{-1} \nabla f(\mathbf{x}_n)$
-  to points to the descent direction, i.e. to satisfy $\nabla f(\mathbf{x}_n) \cdot \mathbf{p}_n < 0$, which amount to
+  In the Newton's method, we need the Newton's step $\mathbf{p}_k = -\left[\nabla^2 f(\mathbf{x}_k)\right]^{-1} \nabla f(\mathbf{x}_k)$
+  to points to the descent direction, i.e. to satisfy $\nabla f(\mathbf{x}_k) \cdot \mathbf{p}_k < 0$, which amount to
   the Hessian matrix in the Newton's step being positive definite. This is becasue
   $$
-    \nabla^\top f(\mathbf{x}_n) \mathbf{p}_n
-    = -\nabla^{\top} f(\mathbf{x}_n)\left[\nabla^2 f(\mathbf{x}_n)\right]^{-1} \nabla f(\mathbf{x}_n) < 0
+    \nabla^\top f(\mathbf{x}_k) \mathbf{p}_k
+    = -\nabla^{\top} f(\mathbf{x}_k)\left[\nabla^2 f(\mathbf{x}_k)\right]^{-1} \nabla f(\mathbf{x}_k) < 0
     \quad \Longleftrightarrow \quad
-    \left[\nabla^2 f(\mathbf{x}_n)\right]^{-1} \text{ is positive definite.}
+    \left[\nabla^2 f(\mathbf{x}_k)\right]^{-1} \text{ is positive definite.}
   $$
   However, this is not always the case, and we will try to modify our scheme to
   accomodate.
 
   Different from the Modified Newton's Method, in this case, the Levenberg-Marquardt algorithm simply revert to
-  the steepest descent (i.e. gradient descent) algorithm $\mathbf{p}_n = - \nabla f(\mathbf{x}_n)$.
+  the steepest descent (i.e. gradient descent) algorithm $\mathbf{p}_k = - \nabla f(\mathbf{x}_k)$.
 
 
 \end{topic}
@@ -496,12 +567,12 @@ WordSpace=1.7,
   \begin{enumerate}
     \item If we assume each $\partial f / \partial x_i$ and $\partial^2 f /
             \partial x_i \partial x_j$ can be evaluated in $O(1)$ operations, then to
-          process the $n^{\text {th }}$ Newton step, i.e. to compute $p_n=-\left[\nabla
-              f\left(x_n\right)\right]^{-1} \nabla f\left(x_n\right)$, we need to solve
+          process the $n^{\text {th }}$ Newton step, i.e. to compute $p_k=-\left[\nabla
+              f\left(x_k\right)\right]^{-1} \nabla f\left(x_k\right)$, we need to solve
           $$
-            \nabla^2 f\left(x_n\right) p_n=-\nabla f\left(x_n\right)
+            \nabla^2 f\left(x_k\right) p_k=-\nabla f\left(x_k\right)
           $$
-          which costs $O\left(n^3\right)$ provided $\nabla^2 f\left(x_n\right)$ is
+          which costs $O\left(n^3\right)$ provided $\nabla^2 f\left(x_k\right)$ is
           symmetric AND if it's positive definite.
     \item We know that if $\mathbf{x}_0$ is sufficiently close to
           $\mathbf{x}^*$, then Newton's method converges quadratically! However, the
@@ -513,12 +584,51 @@ WordSpace=1.7,
 \begin{topic}
   \textbf{Gauss-Newton:}
   The Gauss-Newton Method is a Newton's Method with approximation of the corresponding Hessian Matrix. (Accuracy <----> complexity)
+  Suppose we have $N$ parameters as $\mathbf{c}$ and $M$ observations, then the Non-Linear Least Square problem is:
   $$
-    \begin{aligned}
-       & \operatorname{minimize}_{\mathbf{c} \in \mathbb{R}^N} \|\mathbf{y}-\mathbf{f}(\mathbf{c})\|^2 \quad \mathbf{f}: \mathbb{R}^N \rightarrow \mathbb{R}^M                                                                                           \\
-       & \mathbf{c}_{n+1} \approx \mathbf{c}_n-\left(\mathcal{D} \mathbf{f}(\mathbf{c}_n)^{\top} \mathcal{D} \mathbf{f}(\mathbf{c}_n)\right)^{-1} \mathcal{D} \mathbf{f}(\mathbf{c}_n)^{\top}\left(\mathbf{f}\left(\mathbf{c}_n\right)-\mathbf{y}\right)
-    \end{aligned}
+    \operatorname{minimize}_{\mathbf{c} \in \mathbb{R}^N} \|\mathbf{y}-\mathbf{f}(\mathbf{c})\|^2 \quad \mathbf{f}: \mathbb{R}^N \rightarrow \mathbb{R}^M
   $$
+  Let's define $F(\mathbf{c}) = \|\mathbf{y} - \mathbf{f}(\mathbf{c})\|_2^2$, $F: \mathbb{R}^N \rightarrow \mathbb{R}$, we have by Taylor Expansion:
+  \begin{align*}
+    F(\mathbf{c} + \delta \mathbf{c})
+     & = \|\mathbf{y} - \mathbf{f}(\mathbf{c} + \delta \mathbf{c})\|_2^2 = (\mathbf{y} - \mathbf{f}(\mathbf{c} + \delta \mathbf{c}))^T (\mathbf{y} - \mathbf{f}(\mathbf{c} + \delta \mathbf{c}))
+    =  \left(\mathbf{y} - \mathbf{f}(\mathbf{c}) - \mathcal{D} \mathbf{f}(\mathbf{c}) \delta \mathbf{c} - O\left(\|\delta \mathbf{c}\|_2^2\right)\right)^T \left(\mathbf{y} - \mathbf{f}(\mathbf{c}) - \mathcal{D} \mathbf{f}(\mathbf{c}) \delta \mathbf{c} - O\left(\|\delta \mathbf{c}\|_2^2\right)\right)                           \\
+     & = \mathbf{y}^{\top} \mathbf{y} + \mathbf{f}(\mathbf{c})^{\top} \mathbf{f}(\mathbf{c}) - \mathbf{y}^{\top} \mathbf{f}(\mathbf{c}) - \mathbf{f}(\mathbf{c})^{\top} \mathbf{y} - \mathbf{y}^{\top} \mathcal{D} \mathbf{f}(\mathbf{c}) \delta \mathbf{c} - (\mathcal{D} \mathbf{f}(\mathbf{c}) \delta \mathbf{c})^{\top} \mathbf{y}
+    + \mathbf{f}(\mathbf{c})^{\top} \mathcal{D} \mathbf{f}(\mathbf{c}) \delta \mathbf{c} + (\mathcal{D} \mathbf{f}(\mathbf{c}) \delta \mathbf{c})^{\top} \mathbf{f}(\mathbf{c}) + O\left(\|\delta \mathbf{c}\|_2^2\right)                                                                                                              \\
+     & = F(\mathbf{c}) + 2\left(\mathbf{f}(\mathbf{c})^{\top} \mathcal{D} \mathbf{f}(\mathbf{c}) - \mathbf{y}^{\top} \mathcal{D} \mathbf{f}(\mathbf{c})\right) \delta \mathbf{c} + O\left(\|\delta \mathbf{c}\|_2^2\right)
+  \end{align*}
+  Since $F(\mathbf{c}+\delta \mathbf{c}) = F(\mathbf{c}) + \mathcal{D} F(\mathbf{c}) \delta \mathbf{c} + O\left(\|\delta \mathbf{c}\|_2^2\right)$, comparing with the
+  above equation, we have
+  $$
+    \mathcal{D} F(\mathbf{c}) = 2(\mathbf{f}(\mathbf{c}) - \mathbf{y})^{\top} \cdot \mathcal{D} \mathbf{f}(\mathbf{c})
+    \quad \Longrightarrow \quad
+    \nabla F(\mathbf{c}) = [\mathcal{D} F(\mathbf{c})]^{\top} = 2 \mathcal{D} \mathbf{f}(\mathbf{c})^{\top} \cdot (\mathbf{f}(\mathbf{c}) - \mathbf{y})
+  $$
+  Apply the Newton Method, we have the iteration:
+  \[
+    \mathbf{c}_{k+1} = \mathbf{c}_k - \left[\nabla^2 F(\mathbf{c}_k)\right]^{-1} \cdot \nabla F(\mathbf{c}_k)
+  \]
+
+  Using $\mathcal{D}\left[\mathbf{f}^\top \mathbf{g}\right] = \mathcal{D}
+    \mathbf{f}^\top \cdot \mathbf{g} + \mathbf{f}^\top \cdot \mathcal{D} \mathbf{g}$ and $\nabla F(\mathbf{c}) = 2 \mathcal{D}
+    \mathbf{f}(\mathbf{c})^\top(\mathbf{f}(\mathbf{c}) - \mathbf{y})$, we obtain
+  $$
+    \nabla^2 F(\mathbf{c})
+    = \mathcal{D} \left(\nabla F(\mathbf{c})\right)
+    = 2\mathcal{D} \left(\mathcal{D}\mathbf{f}(\mathbf{c})^\top\cdot \left(\mathbf{f}(\mathbf{c}) - \mathbf{y}\right) \right)
+    = 2\left[\mathcal{D}^2\mathbf{f}(\mathbf{c})^\top \cdot\left(\mathbf{f}(\mathbf{c}) - \mathbf{y}\right) + \mathcal{D}\mathbf{f}(\mathbf{c})^\top\mathcal{D}\mathbf{f}(\mathbf{c})\right]
+    \approx 2 \mathcal{D} \mathbf{f}(\mathbf{c})^\top \cdot \mathcal{D} \mathbf{f}(\mathbf{c})
+  $$
+  Such approximation is valid since near optimum, $\mathbf{y} - \mathbf{f}(\mathbf{c})$ should be very small, so we can safely ignore this term.
+  Now plug this approximation in the Newton's iteration scheme, we get:
+  \[
+    \mathbf{c}_{k+1} \approx \mathbf{c}_k - \left(2 \cdot \mathcal{D} \mathbf{f}(\mathbf{c}_k)^{\top} \cdot \mathcal{D} \mathbf{f}(\mathbf{c}_k)\right)^{-1} \cdot 2 \mathcal{D} \mathbf{f}(\mathbf{c}_k)^{\top} \cdot (\mathbf{f}(\mathbf{c}_k) - \mathbf{y})
+  \]
+  Simply it, we obtain
+  $$
+    \mathbf{c}_{n+1} \approx \mathbf{c}_k-\left(\mathcal{D} \mathbf{f}(\mathbf{c}_k)^{\top} \mathcal{D} \mathbf{f}(\mathbf{c}_k)\right)^{-1} \mathcal{D} \mathbf{f}(\mathbf{c}_k)^{\top}\left(\mathbf{f}\left(\mathbf{c}_k\right)-\mathbf{y}\right)
+  $$
+
 \end{topic}
 
 
@@ -760,24 +870,23 @@ WordSpace=1.7,
     \item The BFGS update maintains the positive definteness of the Hessian approximation $\mathbf{B}_k$ (also $\mathbf{H}_k$)
   \end{enumerate}
 
-  \begin{remark}
-    Since storing the Hessian takes $O\left(D^{2}\right)$ space, for very large
-    problems, one can use limited memory BFGS, or L-BFGS, where
-    $\boldsymbol{H}_{k}$ or $\boldsymbol{H}_{k}^{-1}$ is approximated by a
-    diagonal plus low rank matrix and the product $\boldsymbol{H}_{k}^{-1}
-      \boldsymbol{g}_{k}$ can be obtained by performing a sequence of inner
-    products.
-    $$
-      \ell_{i} \leq x_{i} \leq u_{i}
-    $$
+  \begin{remark}\hfill
+    \begin{enumerate}
+      \item Since storing the Hessian takes $O\left(n^{2}\right)$ space, for very large
+            problems, one can use limited memory BFGS, or L-BFGS, where
+            $\mathbf{H}_{k}$ or $\mathbf{H}_{k}^{-1}$ is approximated by a
+            diagonal plus low rank matrix and the product $\mathbf{H}_{k}^{-1}
+              \nabla f(\mathbf{x}_k)$ can be obtained by performing a sequence of inner products.
+      \item There is also a generalization of L-BFGS which handles bound constraints, ie. constraints of the form
+            \[
+              \ell_{i} \leq x_{i} \leq u_{i}
+            \]
+            where $\ell_{i}<u_{i}$ are real-valued bounds.
 
-    where $\ell_{i}<u_{i}$ are real-valued bounds.
-
-    \begin{itemize}
-      \item These are sometimes referred to as box constraints, and arise often in statistical parameter estimation problems.
-
-      \item For example, one might want to enforce positivity for a variance parameter.
-    \end{itemize}
+            These are sometimes referred to as box constraints, and arise often in
+            statistical parameter estimation problems. For example, one might want to
+            enforce positivity for a variance parameter.
+    \end{enumerate}
   \end{remark}
 
 \end{topic}
@@ -788,15 +897,15 @@ WordSpace=1.7,
 
   \textbf{Descent direction:}
 
-  We call $\mathbf{p}_n$ a descent direction if
-  $$\mathcal{D} f\left(\mathbf{x}_n\right) \mathbf{p}_n<0$$
-  If $\mathbf{p}_n$ is a descent direction then you shall be able to choose $\alpha_n>0$ s.t. $f\left(\mathbf{x}_n+\alpha_n \mathbf{p}_n\right)<f\left(\mathbf{x}_n\right)$
-  (FYI: this is for $\mathbf{x}_{n+1}=\mathbf{x}_n+\alpha_n \mathbf{p}_n$ such as:
+  We call $\mathbf{p}_k$ a descent direction if
+  $$\mathcal{D} f\left(\mathbf{x}_k\right) \mathbf{p}_k<0$$
+  If $\mathbf{p}_k$ is a descent direction then you shall be able to choose $\alpha_k>0$ s.t. $f\left(\mathbf{x}_k+\alpha_k \mathbf{p}_k\right)<f\left(\mathbf{x}_k\right)$
+  (FYI: this is for $\mathbf{x}_{n+1}=\mathbf{x}_k+\alpha_k \mathbf{p}_k$ such as:
   $$
     \begin{aligned}
-      Gradient Descent: & -\nabla f\left(\mathbf{x}_n\right)                                                                \\
-      \text { Newton: } & -\nabla^2 f\left(\mathbf{x}_n\right) \nabla f\left(\mathbf{x}_n\right)                            \\
-      Gauss-Newton:     & -\mathcal{D} f\left(\mathbf{c}_n\right)^\dagger\left(\mathbf{y}-f\left(\mathbf{c}_n\right)\right)
+      Gradient Descent: & -\nabla f\left(\mathbf{x}_k\right)                                                                \\
+      \text { Newton: } & -\nabla^2 f\left(\mathbf{x}_k\right) \nabla f\left(\mathbf{x}_k\right)                            \\
+      Gauss-Newton:     & -\mathcal{D} f\left(\mathbf{c}_k\right)^\dagger\left(\mathbf{y}-f\left(\mathbf{c}_k\right)\right)
     \end{aligned}
   $$
   \vspace*{0.5em}
@@ -805,41 +914,41 @@ WordSpace=1.7,
 
   \textbf{Line Search:}
   \begin{enumerate}
-    \item \textbf{Exact Line Search:} Idea: Find $\alpha_n$ that will minimize $f$ at every step (not necessarily the ultimate minimum). This is because the gradient only points "down" but not directly towards the minimum.
+    \item \textbf{Exact Line Search:} Idea: Find $\alpha_k$ that will minimize $f$ at every step (not necessarily the ultimate minimum). This is because the gradient only points "down" but not directly towards the minimum.
           $$
-            \alpha_n= \arg\min_{\alpha > 0} f\left(\mathbf{x}_n+\alpha \mathbf{p}_n\right)
+            \alpha_k= \arg\min_{\alpha > 0} f\left(\mathbf{x}_k+\alpha \mathbf{p}_k\right)
           $$
           However, exact line search can be very COSTLY computationally. Further
           more, the steepest descent path with exact line-search exhibits a
-          characteristic zig-zag behavior. This is because the necessay condition for $\alpha_n$ is
+          characteristic zig-zag behavior. This is because the necessay condition for $\alpha_k$ is
           \[
-          \phi(\alpha_n)=f(\mathbf{x}_n+\alpha_n \mathbf{p}_n) 
-          \Longrightarrow 
-          \phi^{\prime}(\alpha_n)=(\nabla f)(\mathbf{x}_n+\alpha_n \mathbf{p}_n) \cdot \mathbf{p}_n=0
+            \phi(\alpha_k)=f(\mathbf{x}_k+\alpha_k \mathbf{p}_k)
+            \Longrightarrow
+            \phi^{\prime}(\alpha_k)=(\nabla f)(\mathbf{x}_k+\alpha_k \mathbf{p}_k) \cdot \mathbf{p}_k=0
           \]
           which means that $\nabla f$ at the end of the step is orthogonal to
           $\mathbf{p}_k$, the descent direction, whenever $\mathbf{p}_k \neq 0$.
-          
-    \item \textbf{Heuristic Line Search:} $\alpha_n^{(0)}:=1$; check if $f\left(\mathbf{x}_n+\alpha_n^{(0)} \mathbf{p}_n\right)<f\left(\mathbf{x}_n\right)$, if not, set $\alpha_n^{(1)}=\frac{1}{2} \alpha_n^{(0)}$ and so on.
 
-          e.g. First try $\alpha_n=1$ ---> Failure? ---> try $\alpha_n=\frac{1}{2} \alpha_n$
+    \item \textbf{Heuristic Line Search:} $\alpha_k^{(0)}:=1$; check if $f\left(\mathbf{x}_k+\alpha_k^{(0)} \mathbf{p}_k\right)<f\left(\mathbf{x}_k\right)$, if not, set $\alpha_k^{(1)}=\frac{1}{2} \alpha_k^{(0)}$ and so on.
+
+          e.g. First try $\alpha_k=1$ ---> Failure? ---> try $\alpha_k=\frac{1}{2} \alpha_k$
           $=\frac{1}{2}$ and so on.
     \item \textbf{Backtracking Line Search:} This is just the Heuristic Line Search $+$ the Armijo condition.
-          
-    Setting $\mu \in(0,1 / 2), \beta \in(0,1)$, and given a descent direction $\mathbf{p}_n$, then starting at
-          $\alpha_n^{(0)}=1$, repeat $\alpha_n^{(k)}:=\beta \alpha_n^{(k-1)}$ until
+
+          Setting $\mu \in(0,1 / 2), \beta \in(0,1)$, and given a descent direction $\mathbf{p}_k$, then starting at
+          $\alpha_k^{(0)}=1$, repeat $\alpha_k^{(k)}:=\beta \alpha_k^{(k-1)}$ until
           \[
-            f(\mathbf{x}_n+\alpha_n^{(k)} \mathbf{p}_n)<f(\mathbf{x}_n)+\mu \alpha_n^{(k)} \nabla^\top f\left(\mathbf{x}_n\right)\mathbf{p}_n
-          \quad \text{ Armijo condition }
-            \]
-          Since $\mathbf{p}_n$ is assumed to be a descent direction, we have $\nabla^\top f\left(\mathbf{x}_n\right)
-            \mathbf{p}_n<0$, so for small enough $\alpha_n^{(k)}$ we have
+            f(\mathbf{x}_k+\alpha_k^{(k)} \mathbf{p}_k)<f(\mathbf{x}_k)+\mu \alpha_k^{(k)} \nabla^\top f\left(\mathbf{x}_k\right)\mathbf{p}_k
+            \quad \text{ (Armijo condition) }
+          \]
+          Since $\mathbf{p}_k$ is assumed to be a descent direction, we have $\nabla^\top f\left(\mathbf{x}_k\right)
+            \mathbf{p}_k<0$, so for small enough $\alpha_k^{(k)}$ we have
           \[
-            f(\mathbf{x}_n+\alpha_n^{(k)} \mathbf{p}_n) 
-            \approx 
-            f(\mathbf{x}_n)+\alpha_n^{(k)} \nabla^\top f\left(\mathbf{x}_n\right)\mathbf{p}_n
+            f(\mathbf{x}_k+\alpha_k^{(k)} \mathbf{p}_k)
+            \approx
+            f(\mathbf{x}_k)+\alpha_k^{(k)} \nabla^\top f\left(\mathbf{x}_k\right)\mathbf{p}_k
             <
-            f(\mathbf{x}_n)+\mu \alpha_n^{(k)}\nabla^\top f\left(\mathbf{x}_n\right)\mathbf{p}_n
+            f(\mathbf{x}_k)+\mu \alpha_k^{(k)}\nabla^\top f\left(\mathbf{x}_k\right)\mathbf{p}_k
           \]
           This shows that the backtracking line search eventually terminates.
 
@@ -878,7 +987,7 @@ WordSpace=1.7,
   Let $S: \mathbb{R}^n \rightarrow \mathbb{R}$ set. $\nabla f$ is Lipchitz with constant $L$ (i.e. $\left\|\nabla f\left(\mathbf{x}_1\right)-\nabla f\left(\mathbf{x}_2\right)\right\|_2 \le L\left\|\mathbf{x}_1-\mathbf{x}_2\right\|_2$).
   Let $\mathbf{x}_0 \in \mathbb{R}^n$, and consider the iteration $\mathbf{x}_{k+1}=\mathbf{x}_k+\alpha_k \mathbf{p}_k$ where $\alpha_k$ is chosen using the Backtracking line search with $\alpha_k=1, \frac{1}{2}, \frac{1}{4}, \ldots$ satisfying the following properties:
   \begin{enumerate}
-    \item The set $S=\left\{\mathbf{x} \in \mathbb{R}^n: f(\mathbf{x}) \leqslant f\left(\mathbf{x}_n\right)\right\}$ is bounded.
+    \item The set $S=\left\{\mathbf{x} \in \mathbb{R}^n: f(\mathbf{x}) \leqslant f\left(\mathbf{x}_k\right)\right\}$ is bounded.
     \item The $\mathbf{p}_k$'s satisfy the angle condition with parameter $\varepsilon>0$.
     \item The $\mathbf{p}_k$'s are gradient-related with constant $m>0$.
     \item $\left\|\mathbf{p}_k\right\|_2 \leq M<\infty \quad \forall k \geq 0$.
@@ -893,18 +1002,18 @@ WordSpace=1.7,
 \subsection{Gradient Descent}
 \begin{topic}
   $$
-    \mathbf{x}_{n+1}=\mathbf{x}_n-\alpha \nabla f\left(\mathbf{x}_n\right)
+    \mathbf{x}_{n+1}=\mathbf{x}_k-\alpha \nabla f\left(\mathbf{x}_k\right)
   $$
 
   Note: The negative gradient is always a descent direction unless we are already at a point where the gradient vanishes.
-  This is because if $\nabla f\left(\mathbf{x}_n\right) \neq 0$, then
+  This is because if $\nabla f\left(\mathbf{x}_k\right) \neq 0$, then
   $$
-    \mathcal{D} f\left(\mathbf{x}_n\right) \cdot \left(-\nabla f\left(\mathbf{x}_n\right)\right)
-    = -\nabla^\top f\left(\mathbf{x}_n\right)\nabla f\left(\mathbf{x}_n\right)
-    = - \|\nabla f\left(\mathbf{x}_n\right) \|^2 < 0
-  $$ satisfies the condition for $\nabla f\left(\mathbf{x}_n\right)$ being a descent direction.
-  If $\nabla f\left(\mathbf{x}_n\right) = 0$, this implies that we have arrived at a critical point.
-  In other words, 
+    \mathcal{D} f\left(\mathbf{x}_k\right) \cdot \left(-\nabla f\left(\mathbf{x}_k\right)\right)
+    = -\nabla^\top f\left(\mathbf{x}_k\right)\nabla f\left(\mathbf{x}_k\right)
+    = - \|\nabla f\left(\mathbf{x}_k\right) \|^2 < 0
+  $$ satisfies the condition for $\nabla f\left(\mathbf{x}_k\right)$ being a descent direction.
+  If $\nabla f\left(\mathbf{x}_k\right) = 0$, this implies that we have arrived at a critical point.
+  In other words,
 
   Why do we need learning rate?
   Ans: Because the iteration might bounce back and forth, think $f(x) = x^2$.
@@ -921,12 +1030,14 @@ WordSpace=1.7,
   Newton's Method is useful, but it's costly: $O(N^3)$. Newton's Method might
   not converge if it's not sufficiently close to the optimal.
 
+  What are the advantages and disadvantages of Newton's Method compared to Gradient Descent?
+  \begin{enumerate}
+    \item Gradient Descent is parametric and requires choosing the step size, while Newton's Method does not have hyperparameters.
+    \item Gradient Descent needs more iterations, but each iteration has smaller complexity, $O(n)$ compared to $O(n^3)$ for Newton's Method.
+    \item Newton's Method requires second-order differentiability.
+    \item They exhibit different behavior around stationary points.
+  \end{enumerate}
 
-  newton's method与gradient descent的好处和坏处是什么? - Answer: 1. Gradient
-  descent is parametric, need to choose the step size, while newton's method has
-  no hyperparameters. 2. GD needs more iteration, while for each iteration, GD has
-  smaller complexity. $O(n)$ vs $O(n^3)$. 3. Newton's method require second order
-  differentiability. 4. Different behaviour around stationary points.
 \end{topic}
 
 

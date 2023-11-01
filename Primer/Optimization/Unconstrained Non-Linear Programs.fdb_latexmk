@@ -1,6 +1,6 @@
 # Fdb version 4
-["lualatex"] 1698814038 "/Users/linda/Desktop/LaTeX/Primer/Optimization/Unconstrained Non-Linear Programs.tex" "Unconstrained Non-Linear Programs.pdf" "Unconstrained Non-Linear Programs" 1698814043 0
-  "/Users/linda/Desktop/LaTeX/Primer/Optimization/Unconstrained Non-Linear Programs.tex" 1698814038 41662 dea57a61f5e3ada9efbbd5529cda8c39 ""
+["lualatex"] 1698867526 "/Users/linda/Desktop/LaTeX/Primer/Optimization/Unconstrained Non-Linear Programs.tex" "Unconstrained Non-Linear Programs.pdf" "Unconstrained Non-Linear Programs" 1698867533 0
+  "/Users/linda/Desktop/LaTeX/Primer/Optimization/Unconstrained Non-Linear Programs.tex" 1698867526 48893 b5eb0ad0f76adc05f80ecb21912b299e ""
   "/Users/linda/Library/Fonts/BabelStoneHan.ttf" 1696045405 52217796 c065c5b9d1a4caba71e772ee320424a1 ""
   "/Users/linda/Library/Fonts/Vollkorn-Bold.otf" 1525855805 504600 83467cfa4400474b6d068d7d268da90e ""
   "/Users/linda/Library/Fonts/Vollkorn-BoldItalic.otf" 1525854575 420332 111db9d7a31febd45ac0bb50a2052414 ""
@@ -60,7 +60,6 @@
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb" 1248133631 37166 8ab3487cbe3ab49ebce74c29ea2418db ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1248133631 35469 70d41d2b9ea31d5d813066df7c99281c ""
-  "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb" 1248133631 36912 b448ef9ad9d7228ec3c6e71005136d55 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb" 1248133631 32734 69e00a6b65cedb993666e42eedb3d48f ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
@@ -327,10 +326,10 @@
   "/usr/local/texlive/2023/texmf-dist/tex/luatex/luatexja/patches/lltjp-listings.sty" 1653941231 14914 340890023fe5b05f4034feae149cab10 ""
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1696053482 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/luahbtex/lualatex.fmt" 1694803921 11876210 49080bdcf9fb115e6dd63b7a21cafe03 ""
-  "Unconstrained Non-Linear Programs.aux" 1698814043 2791 9b05de1f4f76e0bfd585661f075191e1 "lualatex"
-  "Unconstrained Non-Linear Programs.out" 1698814043 3179 9745901df934bc64ba666a803c3ca24c "lualatex"
-  "Unconstrained Non-Linear Programs.tex" 1698814038 41662 dea57a61f5e3ada9efbbd5529cda8c39 ""
-  "Unconstrained Non-Linear Programs.toc" 1698814043 1448 bb72a9bae95d5321ef9ed0cab4a8694c "lualatex"
+  "Unconstrained Non-Linear Programs.aux" 1698867532 2791 0ea416d2d791f3104eef8083da6bb3e9 "lualatex"
+  "Unconstrained Non-Linear Programs.out" 1698867532 3179 9745901df934bc64ba666a803c3ca24c "lualatex"
+  "Unconstrained Non-Linear Programs.tex" 1698867526 48893 b5eb0ad0f76adc05f80ecb21912b299e ""
+  "Unconstrained Non-Linear Programs.toc" 1698867532 1448 d787486bc25096a9cab3154965ab9e65 "lualatex"
   (generated)
   "Unconstrained Non-Linear Programs.aux"
   "Unconstrained Non-Linear Programs.log"
